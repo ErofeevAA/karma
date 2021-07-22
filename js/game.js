@@ -1,21 +1,38 @@
 let canvas;
+let model;
 
 function init() {
     canvas = document.getElementById("canvas");
-    canvas.onclick = onClick;
+    menu();
+}
+
+function onClickMenu(event) {
+    let x = subtractMargin(event.x);
+    let y = subtractMargin(event.y);
+    console.log(x + ' ' + y);
+    model.onClick(x, y);
+}
+
+function subtractMargin(val) {
+    let MARGIN = 8;
+    return val - MARGIN;
+}
+
+function menu() {
     let draw_menu = new DrawMenu(canvas);
-    let model = new ModelMenu(canvas.width);
+    model = new ModelMenu(canvas.width);
+    model.btn_multiplayer.func_click = multiplayer;
     draw_menu.drawBackground();
     draw_menu.drawHeader(model.header);
     draw_menu.drawButton(model.btn_multiplayer);
     draw_menu.drawButton(model.btn_single);
     draw_menu.drawButton(model.btn_train);
     draw_menu.drawButton(model.btn_about);
+    canvas.onclick = onClickMenu;
 }
 
-function onClick(event) {
-    let MARGIN = 8;
-    let x = event.x - MARGIN;
-    let y = event.y - MARGIN;
-    console.log(x + ' ' + y);
+function multiplayer() {
+    console.log("multiplayer");
 }
+
+

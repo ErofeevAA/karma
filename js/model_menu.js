@@ -2,19 +2,26 @@ class ModelMenu {
 
     constructor(canvas_width) {
         let x = (canvas_width / 2) - MenuEnum.WIDTH / 2;
-        this.header = new MenuHeader(MenuEnum.HEADER, x, 20, MenuEnum.WIDTH);
+        this.header = new MenuHeader(MenuEnum.HEADER, x, 40, MenuEnum.WIDTH);
         let y = 50;
         let dy = 50;
-        this.btn_multiplayer = this._createButton(MenuEnum.MULTIPLAYER, x, y);
+        this.btn_multiplayer = ModelMenu.createButton(MenuEnum.MULTIPLAYER, x, y);
         y += dy;
-        this.btn_single = this._createButton(MenuEnum.SINGLE_PLAYER, x, y);
+        this.btn_single = ModelMenu.createButton(MenuEnum.SINGLE_PLAYER, x, y);
         y += dy;
-        this.btn_train = this._createButton(MenuEnum.TRAINING, x, y);
+        this.btn_train = ModelMenu.createButton(MenuEnum.TRAINING, x, y);
         y += dy;
-        this.btn_about = this._createButton(MenuEnum.ABOUT, x, y);
+        this.btn_about = ModelMenu.createButton(MenuEnum.ABOUT, x, y);
     }
 
-    _createButton(text, x, y) {
+    onClick(x, y) {
+        this.btn_multiplayer.onClick(x, y);
+        this.btn_single.onClick(x, y);
+        this.btn_train.onClick(x, y);
+        this.btn_about.onClick(x, y);
+    }
+
+    static createButton(text, x, y) {
         let width = MenuEnum.WIDTH;
         let height = MenuEnum.HEIGHT;
         return new MenuButton(text, x, y, width, height);
@@ -32,6 +39,7 @@ class MenuHeader {
 }
 
 class MenuButton {
+    func_click;
 
     constructor(text, x, y, width, height) {
         this.text = text;
@@ -42,8 +50,28 @@ class MenuButton {
         this.radius = height / 2;
     }
 
-    onClick(func) {
-        console.log(this.text + "button");
+    set func_click(func) {
+        this.func_click = func;
+    }
+
+    onClick(x, y) {
+        if (this.checkClickButton(x, y)) {
+            this.func_click();
+        }
+    }
+
+    checkClickButton(x, y) {
+        let rad = this.radius;
+        let dx = this.x - x;
+        let dy = this.y + rad - y;
+        if (dx * dx + dy * dy <= rad * rad) {
+            return true;
+        }
+        dx = this.x + this.width - x;
+        if (dx * dx + dy * dy <= rad * rad) {
+            return true;
+        }
+        return (this.x + this.width >= x && this.y + this.height >= y) && (x >= this.x && y >= this.y);
     }
 }
 
