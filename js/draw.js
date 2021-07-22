@@ -36,17 +36,17 @@ class DrawMenu extends Draw {
         let height = button.height;
         let text = button.text;
         this.context.beginPath();
-        this.context.arc(x, y, radius,  0, 2 *Math.PI);
+        this.context.arc(x, y + radius, radius,  0, 2 *Math.PI);
         this.context.closePath();
         this.context.fill();
-        this.context.fillRect(x, y - radius, width, height);
+        this.context.fillRect(x, y, width, height);
         this.context.beginPath();
-        this.context.arc(x + width, y, radius,  0, 2 * Math.PI);
+        this.context.arc(x + width, y + radius, radius,  0, 2 * Math.PI);
         this.context.closePath();
         this.context.fill();
         this.context.fillStyle = "#000";
         this.context.textAlign = "center";
-        this.context.fillText(text, x  + width / 2, y + 3);
+        this.context.fillText(text, x  + width / 2, y + radius + 3);
     }
 
 }
