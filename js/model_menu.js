@@ -24,7 +24,7 @@ class ModelMenu {
     static createButton(text, x, y) {
         let width = MenuEnum.WIDTH;
         let height = MenuEnum.HEIGHT;
-        return new MenuButton(text, x, y, width, height);
+        return new RoundedButton(text, x, y, width, height);
     }
 }
 
@@ -38,50 +38,12 @@ class MenuHeader {
     }
 }
 
-class MenuButton {
-    func_click;
-
-    constructor(text, x, y, width, height) {
-        this.text = text;
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        this.radius = height / 2;
-    }
-
-    set func_click(func) {
-        this.func_click = func;
-    }
-
-    onClick(x, y) {
-        if (this.checkClickButton(x, y)) {
-            this.func_click();
-        }
-    }
-
-    checkClickButton(x, y) {
-        let rad = this.radius;
-        let dx = this.x - x;
-        let dy = this.y + rad - y;
-        if (dx * dx + dy * dy <= rad * rad) {
-            return true;
-        }
-        dx = this.x + this.width - x;
-        if (dx * dx + dy * dy <= rad * rad) {
-            return true;
-        }
-        return (this.x + this.width >= x && this.y + this.height >= y) && (x >= this.x && y >= this.y);
-    }
-}
-
-
-class MenuEnum {
-    static HEADER = "Карма";
-    static MULTIPLAYER = "Мультиплеер";
-    static SINGLE_PLAYER = "Одиночная игра";
-    static TRAINING = "Обучение";
-    static ABOUT = "О нас";
-    static WIDTH = 70;
-    static HEIGHT = 40;
-}
+const MenuEnum = {
+    HEADER: "Карма",
+    MULTIPLAYER: "Мультиплеер",
+    SINGLE_PLAYER: "Одиночная игра",
+    TRAINING: "Обучение",
+    ABOUT: "О нас",
+    WIDTH: 70,
+    HEIGHT: 40
+};
