@@ -20,6 +20,28 @@ class Button {
     }
 }
 
+class TextButton extends Button {
+
+    constructor(text, x, y, pt) {
+        super(text, x, y);
+        this.pt = pt;
+        this.width = 0;
+        this.height = 50;
+    }
+
+    setSize(width) {
+        this.width = width;
+        //this.height = width / this.text.length;
+        console.log(`width ${this.width} height ${this.height}`);
+    }
+
+    checkClickButton(x, y) {
+        let b_x = this.x - this.width / 2;
+        let b_y = this.y - this.height;
+        return (b_x + this.width >= x && b_y + this.height - 15 >= y) && (x >= b_x && y >= b_y);
+    }
+}
+
 class RoundedButton extends Button {
 
     constructor(text, x, y, width, height) {

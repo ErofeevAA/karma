@@ -1,9 +1,10 @@
 class ModelMenu {
 
     constructor(canvas_width) {
-        let x = (canvas_width / 2) - MenuEnum.WIDTH / 2;
+        let x = 180;
         this.header = new MenuHeader(MenuEnum.HEADER, x, 40, MenuEnum.WIDTH);
-        let y = 50;
+        x = MenuEnum.BUTTON_X;
+        let y = MenuEnum.BUTTON_Y;
         let dy = 50;
         this.btn_multiplayer = ModelMenu.createButton(MenuEnum.MULTIPLAYER, x, y);
         y += dy;
@@ -22,9 +23,9 @@ class ModelMenu {
     }
 
     static createButton(text, x, y) {
-        let width = MenuEnum.WIDTH;
-        let height = MenuEnum.HEIGHT;
-        return new RoundedButton(text, x, y, width, height);
+        /*let width = MenuEnum.WIDTH;
+        let height = MenuEnum.HEIGHT;*/
+        return new TextButton(text, x, y, 20);
     }
 }
 
@@ -45,5 +46,7 @@ const MenuEnum = {
     TRAINING: "Обучение",
     ABOUT: "О нас",
     WIDTH: 70,
-    HEIGHT: 40
+    HEIGHT: 40,
+    BUTTON_X: 210,
+    BUTTON_Y: 180
 };

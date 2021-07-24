@@ -16,7 +16,7 @@ function onClick(event) {
 }
 
 function subtractMargin(val) {
-    let MARGIN = 8;
+    let MARGIN = 10;
     return val - MARGIN;
 }
 
@@ -29,10 +29,10 @@ function menu() {
     g_draw = new DrawMenu(g_canvas);
     g_draw.drawBackground();
     g_draw.drawHeader(g_model.header);
-    g_draw.drawRoundedButton(g_model.btn_multiplayer);
-    g_draw.drawRoundedButton(g_model.btn_single);
-    g_draw.drawRoundedButton(g_model.btn_train);
-    g_draw.drawRoundedButton(g_model.btn_about);
+    g_draw.drawTextButton(g_model.btn_multiplayer);
+    g_draw.drawTextButton(g_model.btn_single);
+    g_draw.drawTextButton(g_model.btn_train);
+    g_draw.drawTextButton(g_model.btn_about);
 }
 
 function multiplayer() {
