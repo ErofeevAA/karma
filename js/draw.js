@@ -1,6 +1,6 @@
 class Draw {
     constructor(canvas) {
-        //this.canvas = canvas;
+        this.canvas = canvas;
         this.context = canvas.getContext("2d");
     }
 
@@ -11,26 +11,6 @@ class Draw {
         this.context.arc(x, y, radius,  0, 2 * Math.PI);
         this.context.closePath();
         this.context.fill();
-    }
-}
-
-class DrawMenu extends Draw {
-
-    constructor(canvas) {
-        super(canvas);
-    }
-
-    drawBackground() {
-        super.drawBackground();
-        this.context.fillStyle = "#000000";
-        this.context.fillRect(0, 0, canvas.width, canvas.height);
-    }
-
-    drawHeader(header) {
-        this.context.strokeStyle = "#FFF000";
-        this.context.textAlign = "center";
-        this.context.strokeText(header.text, header.x + header.width / 2, header.y, header.width);
-        //this.context.fillText(header.text, header.x, header.y, header.width);
     }
 
     drawRoundedButton(button) {
@@ -49,6 +29,37 @@ class DrawMenu extends Draw {
         this.context.textAlign = "center";
         this.context.fillText(text, x  + width / 2, y + radius + 3);
     }
+
+    drawRoundButton(button) {
+        let radius = button.radius;
+        this.context.fillStyle = "#FFF";
+        let x = button.x;
+        let y = button.y + radius;
+        this.drawRound(x, y, radius);
+        this.context.fillStyle = "#000";
+        this.context.textAlign = "center";
+        this.context.fillText(button.text, x, y + 3);
+    }
+}
+
+class DrawMenu extends Draw {
+
+    constructor(canvas) {
+        super(canvas);
+    }
+
+    drawBackground() {
+        super.drawBackground();
+        this.context.fillStyle = "#000000";
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    }
+
+    drawHeader(header) {
+        this.context.strokeStyle = "#FFF000";
+        this.context.textAlign = "center";
+        this.context.strokeText(header.text, header.x + header.width / 2, header.y, header.width);
+        //this.context.fillText(header.text, header.x, header.y, header.width);
+    }
 }
 
 class DrawListRooms extends Draw {
@@ -59,7 +70,7 @@ class DrawListRooms extends Draw {
     drawBackground() {
         super.drawBackground();
         this.context.fillStyle = "#000000";
-        this.context.fillRect(0, 0, canvas.width, canvas.height);
+        this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
     drawRowText(array, x, y) {
@@ -71,16 +82,5 @@ class DrawListRooms extends Draw {
     drawRow(array, x, y, button) {
         this.drawRowText(array, x, y);
         this.drawRoundButton(button);
-    }
-
-    drawRoundButton(button) {
-        let radius = button.radius;
-        this.context.fillStyle = "#FFF";
-        let x = button.x;
-        let y = button.y + radius;
-        this.drawRound(x, y, radius);
-        this.context.fillStyle = "#000";
-        this.context.textAlign = "center";
-        this.context.fillText(button.text, x, y + 3);
     }
 }

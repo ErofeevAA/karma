@@ -1,10 +1,10 @@
-let canvas;
-let model;
-let draw;
+let g_canvas;
+let g_model;
+let g_draw;
 
 function init() {
-    canvas = document.getElementById("canvas");
-    canvas.onclick = onClick;
+    g_canvas = document.getElementById("canvas");
+    g_canvas.onclick = onClick;
     menu();
 }
 
@@ -12,7 +12,7 @@ function onClick(event) {
     let x = subtractMargin(event.x);
     let y = subtractMargin(event.y);
     console.log(x + ' ' + y);
-    model.onClick(x, y);
+    g_model.onClick(x, y);
 }
 
 function subtractMargin(val) {
@@ -21,34 +21,34 @@ function subtractMargin(val) {
 }
 
 function menu() {
-    model = new ModelMenu(canvas.width);
-    model.btn_multiplayer.func_click = multiplayer;
-    model.btn_single.func_click = single_play;
-    model.btn_train.func_click = train;
-    model.btn_about.func_click = about;
-    draw = new DrawMenu(canvas);
-    draw.drawBackground();
-    draw.drawHeader(model.header);
-    draw.drawRoundedButton(model.btn_multiplayer);
-    draw.drawRoundedButton(model.btn_single);
-    draw.drawRoundedButton(model.btn_train);
-    draw.drawRoundedButton(model.btn_about);
+    g_model = new ModelMenu(g_canvas.width);
+    g_model.btn_multiplayer.func_click = multiplayer;
+    g_model.btn_single.func_click = single_play;
+    g_model.btn_train.func_click = train;
+    g_model.btn_about.func_click = about;
+    g_draw = new DrawMenu(g_canvas);
+    g_draw.drawBackground();
+    g_draw.drawHeader(g_model.header);
+    g_draw.drawRoundedButton(g_model.btn_multiplayer);
+    g_draw.drawRoundedButton(g_model.btn_single);
+    g_draw.drawRoundedButton(g_model.btn_train);
+    g_draw.drawRoundedButton(g_model.btn_about);
 }
 
 function multiplayer() {
     console.log("multiplayer");
-    draw = new DrawListRooms(canvas);
-    draw.drawBackground();
-    model = new ModelListRooms(canvas.width);
-    model.callbackGetRooms = callbackGetRooms;
-    model.getRooms();
+    g_draw = new DrawListRooms(g_canvas);
+    g_draw.drawBackground();
+    g_model = new ModelListRooms(g_canvas.width);
+    g_model.callbackGetRooms = callbackGetRooms;
+    g_model.getRooms();
 }
 
 function callbackGetRooms() {
     console.log("callbackGetRooms");
-    draw.drawRowText(model.table[0], model.column_width / 2, 10);
-    for (let i = 1; i < model.table.length; ++i) {
-        draw.drawRow(model.table[i], model.column_width / 2, model.countRowY(i), model.buttons_connect[i - 1]);
+    g_draw.drawRowText(g_model.table[0], g_model.column_width / 2, 10);
+    for (let i = 1; i < g_model.table.length; ++i) {
+        g_draw.drawRow(g_model.table[i], g_model.column_width / 2, g_model.countRowY(i), g_model.buttons_connect[i - 1]);
     }
 }
 
