@@ -24,7 +24,7 @@ class ModelListRooms {
     }
 
     onClick(x, y) {
-        for (let i; i < this.buttons_connect.length; ++i) {
+        for (let i = 0; i < this.buttons_connect.length; ++i) {
             this.buttons_connect[i].onClick(x, y);
         }
     }
@@ -41,14 +41,19 @@ class ModelListRooms {
                 };
                 cur_class.table.push(tmp);
                 let x = (cur_class.column_width / 2) * TableEnum.NUM_COLUMN;
-                let button = new RoundButton(TableEnum.CHECK_MARK, x, 25 + i * 10, 10);
+                let button = new RoundButton(TableEnum.CHECK_MARK, x, cur_class.countRowY(i), 15);
                 button.func_click = function () {
+                    console.log("button " + i);
                     return i;
                 };
                 cur_class.buttons_connect.push(button);
             }
             cur_class.callbackGetRooms();
         });
+    }
+
+    countRowY(index) {
+        return 30 + index * 20;
     }
 }
 

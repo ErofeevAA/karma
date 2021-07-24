@@ -40,7 +40,6 @@ class RoundedButton extends Button {
         if (dx * dx + dy * dy <= rad * rad) {
             return true;
         }
-
         return (this.x + this.width >= x && this.y + this.height >= y) && (x >= this.x && y >= this.y);
     }
 }
@@ -56,8 +55,6 @@ class RoundButton extends Button {
         let rad = this.radius;
         let dx = this.x - x;
         let dy = this.y + rad - y;
-        if (dx * dx + dy * dy <= rad * rad) {
-            return true;
-        }
+        return dx * dx + dy * dy <= rad * rad;
     }
 }

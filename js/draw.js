@@ -74,10 +74,10 @@ class DrawListRooms extends Draw {
     }
 
     drawRoundButton(button) {
-        let x = button.x;
-        let y = button.y;
         let radius = button.radius;
         this.context.fillStyle = "#FFF";
+        let x = button.x;
+        let y = button.y + radius;
         this.drawRound(x, y, radius);
         this.context.fillStyle = "#000";
         this.context.textAlign = "center";

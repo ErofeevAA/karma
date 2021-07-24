@@ -48,7 +48,7 @@ function callbackGetRooms() {
     console.log("callbackGetRooms");
     draw.drawRowText(model.table[0], model.column_width / 2, 10);
     for (let i = 1; i < model.table.length; ++i) {
-        draw.drawRow(model.table[i], model.column_width / 2, 25 + i * 10, model.buttons_connect[i - 1]);
+        draw.drawRow(model.table[i], model.column_width / 2, model.countRowY(i), model.buttons_connect[i - 1]);
     }
 }
 
