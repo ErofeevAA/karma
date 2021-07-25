@@ -67,12 +67,10 @@ function multiplayer() {
     g_block = document.createElement('div');
     g_block.className = "list-rooms-block";
     g_model = new ModelListRooms();
-    g_model.callbackGetRooms = callbackGetRooms;
-    g_model.callbackClickRoom = callbackClickRoom;
-    g_model.getRooms();
+    g_model.getRooms(callbackOutputRooms);
 }
 
-function callbackGetRooms() {
+function callbackOutputRooms() {
     console.log("callbackGetRooms");
 
     let row = document.createElement('div');
@@ -101,6 +99,13 @@ function callbackGetRooms() {
         row.appendChild(btn);
         g_block.appendChild(row);
     }
+    let create_room = document.createElement('button');
+    create_room.className = g_model.create_room.class_name;
+    create_room.innerText = g_model.create_room.text;
+    create_room.addEventListener('click', function (e) {
+        g_model.getRooms(callbackCreateRoom);
+    });
+    g_block.appendChild(create_room);
     g_game_div.appendChild(g_block);
 }
 
@@ -113,6 +118,10 @@ function create_col(tag, className, text) {
 
 function callbackClickRoom(index) {
     console.log(index);
+}
+
+function callbackCreateRoom() {
+
 }
 
 function single_play() {

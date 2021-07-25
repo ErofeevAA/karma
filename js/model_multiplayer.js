@@ -12,9 +12,9 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 class ModelListRooms {
-    callbackGetRooms;
 
     constructor() {
+        this.create_room = new TextBlock("Создать комнату", "text-button");
         this.list_rooms = [];
         this.table = [{
             host: TableEnum.HOST,
@@ -26,12 +26,10 @@ class ModelListRooms {
     }
 
     // noinspection JSUnfilteredForInLoop
-    getRooms() {
+    getRooms(callback) {
         let cur_class = this;
         firebase.database().ref(ConnectEnum.ROOMS).on('value', function (snapshot) {
             let data = snapshot.val();
-            //console.log(data.values());
-            console.log(data)
             cur_class.list_rooms = data;
             for (let key in data) {
                 // noinspection JSUnfilteredForInLoop
@@ -43,8 +41,12 @@ class ModelListRooms {
                 };
                 cur_class.table.push(tmp);
             }
-            cur_class.callbackGetRooms();
+            callback();
         });
+    }
+
+    findFreeNum() {
+
     }
 }
 
