@@ -18,8 +18,8 @@ class DrawMenu extends Draw {
     drawBackground() {
         super.drawBackground();
         this.context.globalAlpha = 0.2;
-        this.context.drawImage(sea, 0, 0, 1510, 700);
+        this.context.drawImage(sea, 0, 0, 1340, 600);
         this.context.globalAlpha = 0.5;
-        this.context.drawImage(blob, 720, 370, 120, 120);
+        this.context.drawImage(blob, 620, 340, 120, 120);
     }
 }
