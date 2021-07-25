@@ -6,6 +6,7 @@ body {
     margin:0 0;
     padding: 20px 1px;
     font: 50pt Megrim;
+    color: #0B0C10;
     -webkit-text-stroke: 2px #66FCF1;
 }
 
@@ -62,7 +63,7 @@ body {
 .col-head {
     margin: 20px 0;
     color: white;
-    font: italic 15pt Arial;
+    font: italic 15pt Satisfy;
     width: 200px;
 
 }
@@ -71,5 +72,17 @@ body {
     width: 200px;
     margin: 10px 0;
     color: white;
-    font: 12pt Arial;
+    font: 12pt Satisfy;
+}
+
+p {
+    border: 0;
+    font: 20pt Satisfy;
+    color: #C5C6C7;
+}
+
+form {
+    margin-left: 20px;
+    margin-top: 60px;
+    text-align: center;
 }
