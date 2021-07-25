@@ -1,6 +1,5 @@
 //let g_canvas;
 let g_model;
-let g_draw;
 let g_player_name;
 let g_game_div;
 let g_block;
@@ -92,7 +91,7 @@ function callbackGetRooms() {
 
         let btn = create_col('button', "", g_model.table[i].button.text);
         btn.addEventListener('click', function (e) {
-            callbackClickRoom(i);
+            callbackClickRoom(g_model.table[i].num_room);
         });
 
         row.appendChild(col1);

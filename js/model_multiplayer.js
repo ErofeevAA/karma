@@ -20,20 +20,26 @@ class ModelListRooms {
             host: TableEnum.HOST,
             num_users: TableEnum.NUM,
             button: new TextBlock(null, null),
+            num_room: -1
         }];
         this.buttons_connect = [];
     }
 
+    // noinspection JSUnfilteredForInLoop
     getRooms() {
         let cur_class = this;
         firebase.database().ref(ConnectEnum.ROOMS).on('value', function (snapshot) {
             let data = snapshot.val();
+            //console.log(data.values());
+            console.log(data)
             cur_class.list_rooms = data;
-            for (let i = 0; i < data.length; ++i) {
+            for (let key in data) {
+                // noinspection JSUnfilteredForInLoop
                 let tmp = {
-                    host: data[i].host,
-                    num_users: data[i].cur_num + '/' + data[i].max_num,
+                    host: data[key].host,
+                    num_users: data[key].cur_num + '/' + data[key].max_num,
                     button: new TextBlock(TableEnum.CHECK_MARK, ""),
+                    num_room: Number(key)
                 };
                 cur_class.table.push(tmp);
             }
