@@ -16,7 +16,7 @@ class ModelMenu {
 }
 
 const MenuEnum = {
-    HEADER: "Карма",
+    HEADER: "It's KARMA",
     MULTIPLAYER: "Мультиплеер",
     SINGLE_PLAYER: "Одиночная игра",
     TRAINING: "Обучение",

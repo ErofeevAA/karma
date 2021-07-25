@@ -1,4 +1,4 @@
-//let g_canvas;
+let g_canvas;
 let g_model;
 let g_player_name;
 let g_game_div;
@@ -18,7 +18,7 @@ function start() {
     console.log(g_player_name);
     if (g_player_name) {
         g_body.removeChild(document.getElementById("input-name"));
-        //g_canvas = document.getElementById("canvas_background");
+        g_canvas = document.getElementById("canvas_background");
         g_game_div = document.createElement('div');
         g_game_div.id = "game";
         g_body.appendChild(g_game_div);
@@ -28,6 +28,8 @@ function start() {
 }
 
 function menu() {
+    let draw_menu = new DrawMenu(g_canvas);
+    draw_menu.drawBackground();
     g_model = new ModelMenu();
     g_block = document.createElement('div');
     g_block.className = "menu-block";

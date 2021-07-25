@@ -1,23 +1,23 @@
 body {
-    background: black;
+    background: #0B0C10;
 }
 
 .text-header {
-    margin: 0 0;
+    margin:0 0;
     padding: 20px 1px;
-    /*position: center;*/
-    font: italic 40pt Arial;
-    color: #FF1E56;
-    -webkit-text-stroke: 2px rgba(255, 172, 65, 0.5);
+    font: 50pt Megrim;
+    -webkit-text-stroke: 2px #66FCF1;
 }
 
 .text-button {
-    /*width: 100%;*/
-    /*position: absolute;*/
     border: 0;
-    font: italic 20pt Arial;
+    font: 20pt Satisfy;
     background: rgba(0, 0, 0, 0);
-    color: rgba(255,172,65,0.5);
+    color: #C5C6C7;
+}
+
+.text-button:hover {
+    color: white;
 }
 
 #canvas_background {
@@ -29,7 +29,6 @@ body {
     z-index: 1;
     left: 0;
     top: 0;
-    /*background-color: #FFFFFF55;*/
     width: 800px;
     height: 600px;
 }
@@ -38,13 +37,12 @@ body {
     display: flex;
     flex-direction: column;
     z-index: 2;
-    margin-left: 10px;
-    margin-top: 10px;
-    left: 30px;
-    top: 110px;
+    margin-left: 650px;
+    margin-top: 130px;
+    left: 300px;
+    top: 150px;
     width: 270px;
     height: 290px;
-    border: 2px rgba(255, 172, 65, 0.5);
     text-align: center;
 }
 
@@ -73,5 +71,5 @@ body {
     width: 200px;
     margin: 10px 0;
     color: white;
-    font: italic 12pt Arial;
+    font: 12pt Arial;
 }
