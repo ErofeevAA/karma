@@ -5,6 +5,7 @@ sea.src = 'assets/background.jpg';
 
 class Draw {
     constructor(canvas_menu) {
+        canvas_menu.setAttribute('height', 600);
         this.context = canvas_menu.getContext("2d");
     }
     drawBackground() {}
