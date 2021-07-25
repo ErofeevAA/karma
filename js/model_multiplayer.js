@@ -14,7 +14,7 @@ firebase.initializeApp(firebaseConfig);
 class ModelListRooms {
 
     constructor() {
-        this.create_room = new TextBlock("Создать комнату", "text-button");
+        this.btn_create_room = new TextBlock("Создать комнату", "text-button");
         this.list_rooms = [];
         this.table = [{
             host: TableEnum.HOST,
@@ -28,10 +28,14 @@ class ModelListRooms {
     // noinspection JSUnfilteredForInLoop
     getRooms(callback) {
         let cur_class = this;
-        firebase.database().ref(ConnectEnum.ROOMS).on('value', function (snapshot) {
+        firebase.database().ref(ConnectEnum.ROOMS).get().then(function (snapshot) {
             let data = snapshot.val();
             cur_class.list_rooms = data;
             for (let key in data) {
+                // noinspection JSUnfilteredForInLoop
+                if (data[key].cur_num === data[key].max_num) {
+                    continue;
+                }
                 // noinspection JSUnfilteredForInLoop
                 let tmp = {
                     host: data[key].host,
@@ -46,7 +50,34 @@ class ModelListRooms {
     }
 
     findFreeNum() {
+        for (let i = 0; i < this.list_rooms.length; ++i) {
+            if (!this.list_rooms[i]) {
+                return i;
+            }
+        }
+        return this.list_rooms.length;
+    }
 
+    createRoom(num, name, max_num) {
+        firebase.database().ref(ConnectEnum.ROOMS + num).set({
+            host: name,
+            cur_num: 1,
+            max_num: max_num,
+            users: {
+                0: name
+            }
+        });
+    }
+
+    connectToRoom(num, name) {
+        let cur_class = this;
+        let u = this.list_rooms[num].users;
+        u[1] = name;
+        console.log(u);
+        firebase.database().ref(ConnectEnum.ROOMS + num).update({
+            cur_num: cur_class.list_rooms[num].cur_num + 1,
+            users: u
+        });
     }
 }
 

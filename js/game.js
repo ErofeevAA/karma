@@ -24,7 +24,6 @@ function start() {
         g_body.appendChild(g_game_div);
         menu();
     }
-
 }
 
 function menu() {
@@ -91,7 +90,7 @@ function callbackOutputRooms() {
 
         let btn = create_col('button', "", g_model.table[i].button.text);
         btn.addEventListener('click', function (e) {
-            callbackClickRoom(g_model.table[i].num_room);
+            clickChooseRoom(g_model.table[i].num_room);
         });
 
         row.appendChild(col1);
@@ -100,8 +99,8 @@ function callbackOutputRooms() {
         g_block.appendChild(row);
     }
     let create_room = document.createElement('button');
-    create_room.className = g_model.create_room.class_name;
-    create_room.innerText = g_model.create_room.text;
+    create_room.className = g_model.btn_create_room.class_name;
+    create_room.innerText = g_model.btn_create_room.text;
     create_room.addEventListener('click', function (e) {
         g_model.getRooms(callbackCreateRoom);
     });
@@ -116,11 +115,17 @@ function create_col(tag, className, text) {
     return col;
 }
 
-function callbackClickRoom(index) {
-    console.log(index);
+function clickChooseRoom(num) {
+    console.log(num);
+    g_model.connectToRoom(num, g_player_name);
 }
 
 function callbackCreateRoom() {
+    let num = g_model.findFreeNum();
+    g_model.createRoom(num, g_player_name, 2);
+}
+
+function netGame() {
 
 }
 
