@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Карма</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase.js"></script>
-    <script type="text/javascript" src="js/tools/buttons.js"></script>
+    <script type="text/javascript" src="js/tools/views.js"></script>
     <script type="text/javascript" src="js/model_menu.js"></script>
     <script type="text/javascript" src="js/model_multiplayer.js"></script>
     <script type="text/javascript" src="js/draw.js"></script>
-    <script type="text/javascript" src="js/game.js"></script>
 </head>
-<body onload="init()">
-<canvas id="canvas" width="1500" height="900"></canvas>
+<body id="body">
+<form id="input-name">
+    <p>Введите имя (до 15 символов, только латинские буквы и цифры):</p>
+    <p><input id="name" pattern="[0-9A-Za-z]{1,15}"></p>
+    <p><button onclick="start()" class="text-button">Ввод</button></p>
+</form>
+<canvas id="canvas_background" width="1340" height="600"></canvas>
+<script type="text/javascript" src="js/game.js"></script>
 </body>
 </html>

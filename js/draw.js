@@ -2,47 +2,11 @@ let blob = new Image();
 blob.src = 'assets/playing_cards/blob.png';
 
 class Draw {
-    constructor(canvas) {
-        this.canvas = canvas;
-        this.context = canvas.getContext("2d");
+    constructor(game) {
+        this.game = game;
     }
 
     drawBackground() {}
-
-    drawRound(x, y, radius) {
-        this.context.beginPath();
-        this.context.arc(x, y, radius,  0, 2 * Math.PI);
-        this.context.closePath();
-        this.context.fill();
-    }
-
-    drawRoundedButton(button) {
-        //this.context.strokeStyle = "#000000"
-        this.context.fillStyle = "#FFFFFF"
-        let x = button.x;
-        let y = button.y;
-        let radius = button.radius;
-        let width = button.width;
-        let height = button.height;
-        let text = button.text;
-        this.drawRound(x, y + radius, radius);
-        this.context.fillRect(x, y, width, height);
-        this.drawRound(x + width, y + radius, radius);
-        this.context.fillStyle = "#000";
-        this.context.textAlign = "center";
-        this.context.fillText(text, x  + width / 2, y + radius + 3);
-    }
-
-    drawRoundButton(button) {
-        let radius = button.radius;
-        this.context.fillStyle = "#FFF";
-        let x = button.x;
-        let y = button.y + radius;
-        this.drawRound(x, y, radius);
-        this.context.fillStyle = "#000";
-        this.context.textAlign = "center";
-        this.context.fillText(button.text, x, y + 3);
-    }
 }
 
 class DrawMenu extends Draw {
@@ -107,6 +71,5 @@ class DrawListRooms extends Draw {
 
     drawRow(array, x, y, button) {
         this.drawRowText(array, x, y);
-        this.drawRoundButton(button);
     }
 }

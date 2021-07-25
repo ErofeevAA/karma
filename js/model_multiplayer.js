@@ -14,19 +14,14 @@ firebase.initializeApp(firebaseConfig);
 class ModelListRooms {
     callbackGetRooms;
 
-    constructor(canvas_width) {
-        this.column_width = canvas_width / TableEnum.NUM_COLUMN;
+    constructor() {
         this.list_rooms = [];
         this.table = [{
             host: TableEnum.HOST,
-            num_users: TableEnum.NUM}];
+            num_users: TableEnum.NUM,
+            button: new TextBlock(null, null),
+        }];
         this.buttons_connect = [];
-    }
-
-    onClick(x, y) {
-        for (let i = 0; i < this.buttons_connect.length; ++i) {
-            this.buttons_connect[i].onClick(x, y);
-        }
     }
 
     getRooms() {
@@ -38,22 +33,12 @@ class ModelListRooms {
                 let tmp = {
                     host: data[i].host,
                     num_users: data[i].cur_num + '/' + data[i].max_num,
+                    button: new TextBlock(TableEnum.CHECK_MARK, ""),
                 };
                 cur_class.table.push(tmp);
-                let x = (cur_class.column_width / 2) * TableEnum.NUM_COLUMN;
-                let button = new RoundButton(TableEnum.CHECK_MARK, x, cur_class.countRowY(i), 15);
-                button.func_click = function () {
-                    console.log("button " + i);
-                    return i;
-                };
-                cur_class.buttons_connect.push(button);
             }
             cur_class.callbackGetRooms();
         });
-    }
-
-    countRowY(index) {
-        return 30 + index * 20;
     }
 }
 
