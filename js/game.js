@@ -54,16 +54,6 @@ function menu() {
     g_block.appendChild(b_about);
 }
 
-function initButton(button_class_param, callback) {
-    let button = document.createElement("button");
-    button.className = button_class_param.class_name;
-    button.innerText = button_class_param.text;
-    button.addEventListener('click', function (e) {
-        callback();
-    });
-    return button;
-}
-
 function multiplayer() {
     console.log("multiplayer");
     g_game_div.removeChild(g_block);
@@ -93,8 +83,8 @@ function callbackOutputRooms() {
         let col2 = create_col('p', "col-row", g_model.table[i].num_users);
 
         let btn = create_col('button', "", g_model.table[i].button.text);
-        btn.addEventListener('click', function (e) {
-            g_num_room = g_model.table[i].num_room
+        btn.addEventListener('click', function () {
+            g_num_room = g_model.table[i].num_room;
             clickChooseRoom();
         });
 
@@ -106,7 +96,7 @@ function callbackOutputRooms() {
     let create_room = document.createElement('button');
     create_room.className = g_model.btn_create_room.class_name;
     create_room.innerText = g_model.btn_create_room.text;
-    create_room.addEventListener('click', function (e) {
+    create_room.addEventListener('click', function () {
         g_model.getRooms(callbackCreateRoom);
     });
     g_block.appendChild(create_room);
@@ -116,13 +106,6 @@ function callbackOutputRooms() {
     g_block.appendChild(update);
     let back = initButton(new TextBlock("Назад", "text-button"), menu);
     g_block.appendChild(back);
-}
-
-function create_col(tag, className, text) {
-    let col = document.createElement(tag);
-    col.className = className;
-    col.innerText = text;
-    return col;
 }
 
 function clickChooseRoom() {
@@ -187,4 +170,21 @@ function initText(text_block) {
     elem.className = text_block.class_name;
     elem.innerText = text_block.text;
     return elem;
+}
+
+function initButton(block, callback) {
+    let button = document.createElement("button");
+    button.className = block.class_name;
+    button.innerText = block.text;
+    button.addEventListener('click', function () {
+        callback();
+    });
+    return button;
+}
+
+function create_col(tag, className, text) {
+    let col = document.createElement(tag);
+    col.className = className;
+    col.innerText = text;
+    return col;
 }
