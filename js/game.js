@@ -31,6 +31,9 @@ function menu() {
     let draw_menu = new DrawMenu(g_canvas);
     draw_menu.drawBackground();
     g_model = new ModelMenu();
+    if (g_block !== undefined) {
+        g_game_div.removeChild(g_block);
+    }
     g_block = document.createElement('div');
     g_block.className = "menu-block";
     g_game_div.appendChild(g_block);
@@ -108,6 +111,11 @@ function callbackOutputRooms() {
     });
     g_block.appendChild(create_room);
     g_game_div.appendChild(g_block);
+
+    let update = initButton(new TextBlock("Обновить", "text-button"), multiplayer);
+    g_block.appendChild(update);
+    let back = initButton(new TextBlock("Назад", "text-button"), menu);
+    g_block.appendChild(back);
 }
 
 function create_col(tag, className, text) {
