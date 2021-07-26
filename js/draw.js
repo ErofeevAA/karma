@@ -10,6 +10,7 @@ class Draw {
     }
     drawBackground() {}
     drawAbout() {}
+    drawTrain() {}
 }
 
 class DrawMenu extends Draw {
@@ -38,5 +39,17 @@ class DrawAbout extends Draw {
         this.context.globalAlpha = 0.6;
         this.context.fillStyle = '#0B0C10';
         this.context.fillRect(300, 100, 650, 400);
+    }
+}
+
+class DrawTrain extends Draw {
+    constructor(canvas_train) {
+        super(canvas_train);
+    }
+
+    drawTrain() {
+        super.drawTrain();
+        this.context.globalAlpha = 0.2;
+        this.context.drawImage(sea, 0, 0, 1340, 600);
     }
 }

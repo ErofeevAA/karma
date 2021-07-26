@@ -139,7 +139,56 @@ function single_play() {
 }
 
 function train() {
-    console.log("rules");
+    let draw_train = new DrawTrain(g_canvas);
+    draw_train.drawTrain();
+    g_game_div.removeChild(g_block);
+    g_block = document.createElement('div');
+    g_block.className = "train-block";
+    g_model = new ModelTrain();
+
+    g_game_div.appendChild(g_block);
+
+    let deck = initText(g_model.deck);
+    let distribution = initText(g_model.distribution);
+    let distribution_text = initText(g_model.distribution_text);
+    let game_train = initText(g_model.game_train);
+    let game_text1 = initText(g_model.game_text1);
+    let game_text2 = initText(g_model.game_text2);
+    let end_train = initText(g_model.end_train);
+    let end_text = initText(g_model.end_text);
+    let karma_cards = initText(g_model.karma_cards);
+    let karma_cards_text = initText(g_model.karma_cards_text);
+    let give_a_stack_to_a_friend = initText(g_model.give_a_stack_to_a_friend);
+    let give_a_stack_to_a_friend_text = initText(g_model.give_a_stack_to_a_friend_text);
+    let play_a_card_from_the_table = initText(g_model.play_a_card_from_the_table);
+    let play_a_card_from_the_table_text = initText(g_model.play_a_card_from_the_table_text);
+    let from_bottom_to_top = initText(g_model.from_bottom_to_top);
+    let from_bottom_to_top_text = initText(g_model.from_bottom_to_top_text);
+    let five_or_less = initText(g_model.five_or_less);
+    let five_or_less_text = initText(g_model.five_or_less_text);
+
+    let b_menu = initButton(g_model.btn_menu, menu);
+
+    g_block.appendChild(deck);
+    g_block.appendChild(distribution);
+    g_block.appendChild(distribution_text);
+    g_block.appendChild(game_train);
+    g_block.appendChild(game_text1);
+    g_block.appendChild(game_text2);
+    g_block.appendChild(end_train);
+    g_block.appendChild(end_text);
+    g_block.appendChild(karma_cards);
+    g_block.appendChild(karma_cards_text);
+    g_block.appendChild(give_a_stack_to_a_friend);
+    g_block.appendChild(give_a_stack_to_a_friend_text);
+    g_block.appendChild(play_a_card_from_the_table);
+    g_block.appendChild(play_a_card_from_the_table_text);
+    g_block.appendChild(from_bottom_to_top);
+    g_block.appendChild(from_bottom_to_top_text);
+    g_block.appendChild(five_or_less);
+    g_block.appendChild(five_or_less_text);
+
+    g_block.appendChild(b_menu);
 }
 
 function about() {
