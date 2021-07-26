@@ -168,21 +168,10 @@ function about() {
     g_model = new ModelAbout();
     g_game_div.appendChild(g_block);
 
-    let contributors = document.createElement('p');
-    contributors.className = g_model.contributors.class_name;
-    contributors.innerText = g_model.contributors.text;
-
-    let contributor1 = document.createElement('p');
-    contributor1.className = g_model.contributor1.class_name;
-    contributor1.innerText = g_model.contributor1.text;
-
-    let contributor2 = document.createElement('p');
-    contributor2.className = g_model.contributor2.class_name;
-    contributor2.innerText = g_model.contributor2.text;
-
-    let information = document.createElement('p');
-    information.className = g_model.information.class_name;
-    information.innerText = g_model.information.text;
+    let contributors = initText(g_model.contributors);
+    let contributor1 = initText(g_model.contributor1);
+    let contributor2 = initText(g_model.contributor2);
+    let information = initText(g_model.information);
 
     let b_menu = initButton(g_model.btn_menu, menu);
 
@@ -191,4 +180,11 @@ function about() {
     g_block.appendChild(contributor2);
     g_block.appendChild(information);
     g_block.appendChild(b_menu);
+}
+
+function initText(text_block) {
+    let elem = document.createElement('p');
+    elem.className = text_block.class_name;
+    elem.innerText = text_block.text;
+    return elem;
 }
