@@ -19,6 +19,6 @@ const MenuEnum = {
     HEADER: "It's KARMA",
     MULTIPLAYER: "Мультиплеер",
     SINGLE_PLAYER: "Одиночная игра",
-    TRAINING: "Обучение",
+    TRAINING: "Правила",
     ABOUT: "О нас",
 };

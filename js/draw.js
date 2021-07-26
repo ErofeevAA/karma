@@ -9,6 +9,7 @@ class Draw {
         this.context = canvas_menu.getContext("2d");
     }
     drawBackground() {}
+    drawAbout() {}
 }
 
 class DrawMenu extends Draw {
@@ -22,5 +23,20 @@ class DrawMenu extends Draw {
         this.context.drawImage(sea, 0, 0, 1340, 600);
         this.context.globalAlpha = 0.5;
         this.context.drawImage(blob, 620, 340, 120, 120);
+    }
+}
+
+class DrawAbout extends Draw {
+    constructor(canvas_about) {
+        super(canvas_about);
+    }
+
+    drawAbout() {
+        super.drawAbout();
+        this.context.globalAlpha = 0.2;
+        this.context.drawImage(sea, 0, 0, 1340, 600);
+        this.context.globalAlpha = 0.6;
+        this.context.fillStyle = '#0B0C10';
+        this.context.fillRect(300, 100, 650, 400);
     }
 }

@@ -2,6 +2,37 @@ body {
     background: #0B0C10;
 }
 
+.text-contributors {
+    margin:0 0;
+    padding: 20px 1px;
+    font: 50pt Megrim;
+    color: #C5C6C7;
+}
+
+.text-contributor1 {
+    margin:0 0;
+    padding: 14px 1px;
+    color: #C5C6C7;
+}
+
+.text-contributor2 {
+    margin:0 0;
+    padding: 14px 1px;
+    color: #C5C6C7;
+}
+
+.about-block {
+    display: flex;
+    flex-direction: column;
+    z-index: 2;
+    margin-left: 330px;
+    margin-top: 100px;
+    left: 300px;
+    top: 100px;
+    width: 650px;
+    height: 400px;
+}
+
 .text-header {
     margin:0 0;
     padding: 20px 1px;

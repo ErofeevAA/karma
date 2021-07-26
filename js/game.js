@@ -156,9 +156,39 @@ function single_play() {
 }
 
 function train() {
-    console.log("train");
+    console.log("rules");
 }
 
 function about() {
-    console.log("about");
+    let draw_about = new DrawAbout(g_canvas);
+    draw_about.drawAbout();
+    g_game_div.removeChild(g_block);
+    g_block = document.createElement('div');
+    g_block.className = "about-block";
+    g_model = new ModelAbout();
+    g_game_div.appendChild(g_block);
+
+    let contributors = document.createElement('p');
+    contributors.className = g_model.contributors.class_name;
+    contributors.innerText = g_model.contributors.text;
+
+    let contributor1 = document.createElement('p');
+    contributor1.className = g_model.contributor1.class_name;
+    contributor1.innerText = g_model.contributor1.text;
+
+    let contributor2 = document.createElement('p');
+    contributor2.className = g_model.contributor2.class_name;
+    contributor2.innerText = g_model.contributor2.text;
+
+    let information = document.createElement('p');
+    information.className = g_model.information.class_name;
+    information.innerText = g_model.information.text;
+
+    let b_menu = initButton(g_model.btn_menu, menu);
+
+    g_block.appendChild(contributors);
+    g_block.appendChild(contributor1);
+    g_block.appendChild(contributor2);
+    g_block.appendChild(information);
+    g_block.appendChild(b_menu);
 }
