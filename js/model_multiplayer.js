@@ -22,7 +22,6 @@ class ModelListRooms {
             button: new TextBlock(null, null),
             num_room: -1
         }];
-        this.buttons_connect = [];
     }
 
     // noinspection JSUnfilteredForInLoop

@@ -3,6 +3,7 @@ let g_model;
 let g_player_name;
 let g_game_div;
 let g_block;
+let g_num_room;
 
 let g_body = document.getElementById("body");
 
@@ -90,7 +91,8 @@ function callbackOutputRooms() {
 
         let btn = create_col('button', "", g_model.table[i].button.text);
         btn.addEventListener('click', function (e) {
-            clickChooseRoom(g_model.table[i].num_room);
+            g_num_room = g_model.table[i].num_room
+            clickChooseRoom();
         });
 
         row.appendChild(col1);
@@ -115,18 +117,30 @@ function create_col(tag, className, text) {
     return col;
 }
 
-function clickChooseRoom(num) {
-    console.log(num);
-    g_model.connectToRoom(num, g_player_name);
+function clickChooseRoom() {
+    console.log(g_num_room);
+    g_model.getRooms(callBackChooseRoom);
+
+}
+
+function callBackChooseRoom() {
+    if (g_model.list_rooms[g_num_room]) {
+        g_model.connectToRoom(g_num_room, g_player_name);
+        netGame();
+        return;
+    }
+    multiplayer();
 }
 
 function callbackCreateRoom() {
-    let num = g_model.findFreeNum();
-    g_model.createRoom(num, g_player_name, 2);
+    g_num_room = g_model.findFreeNum();
+    g_model.createRoom(g_num_room, g_player_name, 2);
+    netGame();
 }
 
 function netGame() {
-
+    g_game_div.removeChild(g_block);
+    g_block = document.createElement('div');
 }
 
 function single_play() {
