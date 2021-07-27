@@ -16,7 +16,7 @@ document.getElementById("input-name").addEventListener('keydown', function(e) {
 
 function start() {
     g_player_name = document.getElementById("name").value.replace(/[^\d^A-Za-z]/g, '');
-    console.log(g_player_name);
+    console.log("player name: " + g_player_name);
     if (g_player_name) {
         g_body.removeChild(document.getElementById("input-name"));
         g_canvas = document.getElementById("canvas_background");
@@ -85,7 +85,8 @@ function callbackOutputRooms() {
         let btn = create_col('button', "", g_model.table[i].button.text);
         btn.addEventListener('click', function () {
             g_num_room = g_model.table[i].num_room;
-            clickChooseRoom();
+            console.log("chosen room: ", g_num_room);
+            g_model.getRooms(callBackChooseRoom);
         });
 
         row.appendChild(col1);
@@ -108,16 +109,10 @@ function callbackOutputRooms() {
     g_block.appendChild(back);
 }
 
-function clickChooseRoom() {
-    console.log(g_num_room);
-    g_model.getRooms(callBackChooseRoom);
-
-}
-
 function callBackChooseRoom() {
     if (g_model.list_rooms[g_num_room]) {
         g_model.connectToRoom(g_num_room, g_player_name);
-        g_model = new ModelGameClient();
+        g_model = new ModelGameClient(g_num_room);
         netGame();
         return;
     }
