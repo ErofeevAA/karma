@@ -52,9 +52,7 @@ class ModelListRooms {
             host: name,
             cur_num: 1,
             max_num: max_num,
-            users: {
-                0: {name: name}
-            }
+            users: {0:  name}
         });
     }
 
@@ -63,9 +61,9 @@ class ModelListRooms {
         let u = this.list_rooms[num].users;
         u[1] = name;
         console.log("users in room", u);
-        firebase.database().ref(ConnectEnum.ROOMS + num).set({
+        firebase.database().ref(ConnectEnum.ROOMS + num).update({
             cur_num: cur_class.list_rooms[num].cur_num + 1,
-            users: {1: {name: name}}
+            users: u
         });
     }
 }
