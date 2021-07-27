@@ -3,7 +3,7 @@ class ModelGameHost {
     constructor(num_room) {
         //this.num_room = num_room;
         this.field = new Field();
-        this.ref =  firebase.database().ref("room").orderByChild(String(num_room));
+        this.ref =  firebase.database().ref("room/" + num_room);
         this.wait();
     }
 
@@ -24,7 +24,7 @@ class ModelGameHost {
     }
 
     sendDeck() {
-        let cur_class = this;
+        //let cur_class = this;
         for (let i = 0; i < this.field.players; ++i) {
             let cards_in_hands = [];
             for (let j = 0; j < this.field.players[i].cards_in_hand; ++j) {
@@ -34,7 +34,7 @@ class ModelGameHost {
             for (let j = 0; j < this.field.players[i].cards_on_table; ++j) {
                 cards_on_table.push(this.field.players[i].cards_on_table[j].name);
             }
-            this.ref.orderByChild("users").orderByChild(i).update({
+            this.ref.orderByChild("users/" + i).update({
                 cards_in_hand: cards_in_hands,
                 cards_on_table: cards_on_table
             });
@@ -46,9 +46,9 @@ class ModelGameHost {
 class ModelGameClient {
 
     constructor(num_room) {
-        this.num_room = num_room;
+        //this.num_room = num_room;
         this.field = new Field();
-        this.ref =  firebase.database().ref("room").orderByChild(String(num_room));
+        this.ref =  firebase.database().ref("room/" + num_room);
         this.wait();
     }
 
