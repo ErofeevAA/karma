@@ -36,6 +36,9 @@ class ModelListRooms {
     }
 
     findFreeNum() {
+        if (!this.list_rooms) {
+            return 0;
+        }
         for (let i = 0; i < this.list_rooms.length; ++i) {
             if (!this.list_rooms[i]) {
                 return i;
@@ -60,7 +63,7 @@ class ModelListRooms {
         let u = this.list_rooms[num].users;
         u[1] = name;
         console.log("users in room", u);
-        firebase.database().ref(ConnectEnum.ROOMS + num).update({
+        firebase.database().ref(ConnectEnum.ROOMS + num).set({
             cur_num: cur_class.list_rooms[num].cur_num + 1,
             users: {1: {name: name}}
         });
