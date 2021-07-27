@@ -76,8 +76,16 @@ class ModelGameClient {
     }
 
     getDeck() {
-        this.ref.child("users").on('value', function (snapshot) {
+        let cur_class = this;
+        let val_changed = this.ref.on('value', function (snapshot) {
             console.log(snapshot.val());
+            let data = snapshot.val();
+            let l_index = cur_class.field.players.length - 1;
+            if (data.user_cards[l_index] !== undefined) {
+                console.log("getDeck if");
+                cur_class.ref.off('value', val_changed);
+                cur_class.field.setPlayersCards(data.user_cards);
+            }
         });
     }
 }

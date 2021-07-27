@@ -25,7 +25,7 @@ class Player {
     constructor(name) {
         this.name = name;
         this.cards_in_hand = [];
-        this.cards_on_table = []
+        this.cards_on_table = [];
         this.state = undefined;
     }
 }
@@ -35,6 +35,7 @@ class Field {
     constructor() {
         this.players = [];
         this.deck = [];
+        this.cards_in_fight = [];
     }
 
     init(names) {
@@ -59,11 +60,20 @@ class Field {
                 this.players[i].cards_on_table.push([this.deck.pop(), this.deck.pop()]);
             }
         }
+        let num_attacker = Math.floor(Math.random() * this.players.length);
+        this.players[num_attacker].state = PlayerState.ATTACKER;
     }
 
     setPlayers(names) {
         for (let i = 0; i < names.length; ++i) {
             this.players.push(new Player(names[i]));
+        }
+    }
+
+    setPlayersCards(cards) {
+        for (let i = 0; i < this.players.length; ++i) {
+            this.players[i].cards_in_hand = cards[i].cards_in_hand;
+            this.players[i].cards_on_table = cards[i].cards_on_table;
         }
     }
 
@@ -96,4 +106,4 @@ const CardsEnum = {
     PLAY_CARD: "play_a_card_from_the_table",
     BOTTOM_TOP: "from_bottom_to_top",
     FIVE_OR_LESS: "five_or_less"
-}
+};
