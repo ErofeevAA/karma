@@ -38,8 +38,21 @@ class Field {
     }
 
     init(names) {
-        this.generateDeckOfCard();
+        for (let i = 0; i < 2; ++i) {
+            for (let j = 1; j < 17; ++j) {
+                let path = CardsEnum.PATH_TO_NUM + j + ".png";
+                this.deck.push(new NumCard(path, j));
+            }
+            this.pushKarmaCard(CardsEnum.GIVE_STACK);
+            this.pushKarmaCard(CardsEnum.PLAY_CARD);
+            this.pushKarmaCard(CardsEnum.BOTTOM_TOP);
+            this.pushKarmaCard(CardsEnum.FIVE_OR_LESS);
+        }
+
+        this.randomizeDeck();
+
         this.setPlayers(names);
+
         for (let i = 0; i < this.players.length; ++i) {
             for (let j = 0; j < 3; ++j) {
                 this.players[i].cards_in_hand.push(this.deck.pop());
@@ -54,22 +67,14 @@ class Field {
         }
     }
 
-    generateDeckOfCard() {
-        for (let i = 0; i < 2; ++i) {
-            for (let j = 1; j < 17; ++j) {
-                let path = CardsEnum.PATH_TO_NUM + j + ".png";
-                this.deck.push(new NumCard(path, j));
+    randomizeDeck() {
+        for (let k = 0; k < 10; ++k) {
+            for (let i = 0; i < this.deck.length; ++i) {
+                let j = Math.floor(Math.random() * 40);
+                let tmp = this.deck[i];
+                this.deck[i] = this.deck[j];
+                this.deck[j] = tmp;
             }
-            this.pushKarmaCard(CardsEnum.GIVE_STACK);
-            this.pushKarmaCard(CardsEnum.PLAY_CARD);
-            this.pushKarmaCard(CardsEnum.BOTTOM_TOP);
-            this.pushKarmaCard(CardsEnum.FIVE_OR_LESS);
-        }
-        for (let i = 0; i < this.deck.length; ++i) {
-            let j = Math.floor(Math.random() * 40);
-            let tmp = this.deck[i];
-            this.deck[i] = this.deck[j];
-            this.deck[j] = tmp;
         }
     }
 
