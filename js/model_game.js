@@ -12,7 +12,7 @@ class ModelGameHost {
         this.ref.on('value', function (snapshot) {
             console.log(snapshot.val());
             if (snapshot.val().cur_num === snapshot.val().max_num) {
-                cur_class.ref.off('values', function (s){});
+                cur_class.ref.off('value', function (s){});
                 cur_class.play(snapshot.users);
             }
         });
@@ -57,7 +57,7 @@ class ModelGameClient {
         this.ref.on('value', function (snapshot) {
             console.log(snapshot.val());
             if (snapshot.val().cur_num === snapshot.val().max_num) {
-                cur_class.ref.off('values', function (s){});
+                cur_class.ref.off('value', function (s){});
                 cur_class.field.setPlayers(snapshot.val().users);
                 cur_class.getDeck(snapshot.users);
             }
