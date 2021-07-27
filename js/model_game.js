@@ -3,7 +3,7 @@ class ModelGameHost {
     constructor(num_room) {
         //this.num_room = num_room;
         this.field = new Field();
-        this.ref =  firebase.database.ref("room").orderByChild(num_room);
+        this.ref =  firebase.database().ref("room").orderByChild(String(num_room));
         this.wait();
     }
 
@@ -48,7 +48,7 @@ class ModelGameClient {
     constructor(num_room) {
         this.num_room = num_room;
         this.field = new Field();
-        this.ref =  firebase.database.ref("room").orderByChild(num_room);
+        this.ref =  firebase.database().ref("room").orderByChild(String(num_room));
         this.wait();
     }
 
