@@ -117,7 +117,7 @@ function clickChooseRoom() {
 function callBackChooseRoom() {
     if (g_model.list_rooms[g_num_room]) {
         g_model.connectToRoom(g_num_room, g_player_name);
-        g_model = ModelGameClient();
+        g_model = new ModelGameClient();
         netGame();
         return;
     }
