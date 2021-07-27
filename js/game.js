@@ -143,8 +143,6 @@ function train() {
     g_block.className = "train-block";
     g_model = new ModelTrain();
 
-    g_game_div.appendChild(g_block);
-
     let deck = initText(g_model.deck);
     let distribution = initText(g_model.distribution);
     let distribution_text = initText(g_model.distribution_text);
@@ -166,26 +164,31 @@ function train() {
 
     let b_menu = initButton(g_model.btn_menu, menu);
 
-    g_block.appendChild(deck);
-    g_block.appendChild(distribution);
-    g_block.appendChild(distribution_text);
-    g_block.appendChild(game_train);
-    g_block.appendChild(game_text1);
-    g_block.appendChild(game_text2);
-    g_block.appendChild(end_train);
-    g_block.appendChild(end_text);
-    g_block.appendChild(karma_cards);
-    g_block.appendChild(karma_cards_text);
-    g_block.appendChild(give_a_stack_to_a_friend);
-    g_block.appendChild(give_a_stack_to_a_friend_text);
-    g_block.appendChild(play_a_card_from_the_table);
-    g_block.appendChild(play_a_card_from_the_table_text);
-    g_block.appendChild(from_bottom_to_top);
-    g_block.appendChild(from_bottom_to_top_text);
-    g_block.appendChild(five_or_less);
-    g_block.appendChild(five_or_less_text);
+    let rules_block = document.createElement('div');
+    rules_block.className = 'rules-block';
 
+    rules_block.appendChild(deck);
+    rules_block.appendChild(distribution);
+    rules_block.appendChild(distribution_text);
+    rules_block.appendChild(game_train);
+    rules_block.appendChild(game_text1);
+    rules_block.appendChild(game_text2);
+    rules_block.appendChild(end_train);
+    rules_block.appendChild(end_text);
+    rules_block.appendChild(karma_cards);
+    rules_block.appendChild(karma_cards_text);
+    rules_block.appendChild(give_a_stack_to_a_friend);
+    rules_block.appendChild(give_a_stack_to_a_friend_text);
+    rules_block.appendChild(play_a_card_from_the_table);
+    rules_block.appendChild(play_a_card_from_the_table_text);
+    rules_block.appendChild(from_bottom_to_top);
+    rules_block.appendChild(from_bottom_to_top_text);
+    rules_block.appendChild(five_or_less);
+    rules_block.appendChild(five_or_less_text);
+
+    g_block.appendChild(rules_block);
     g_block.appendChild(b_menu);
+    g_game_div.appendChild(g_block);
 }
 
 function about() {

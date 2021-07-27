@@ -79,10 +79,16 @@ body {
 }
 
 .train-block {
-    margin-left: 150px;
-    margin-top: 100px;
-    width:1040px;
-    height:400px;
+    display: flex;
+    flex-direction: column;
+    height: 600px;
+}
+
+.rules-block {
+    margin-left: 200px;
+    margin-top: 70px;
+    width:940px;
+    height:450px;
     background:  #0B0C10;
     border: 1px solid  #1B1C12;
     overflow-x: scroll;
