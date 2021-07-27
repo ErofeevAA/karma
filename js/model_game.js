@@ -76,7 +76,7 @@ class ModelGameClient {
     }
 
     getDeck() {
-        this.ref.orderByChild("users").on('value', function (snapshot) {
+        this.ref.child("users").on('value', function (snapshot) {
             console.log(snapshot.val());
         });
     }
