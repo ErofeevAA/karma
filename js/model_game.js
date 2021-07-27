@@ -40,14 +40,10 @@ class ModelGameHost {
             }
             this.ref.child("user_cards/" + i).set({
                 cards_in_hand: {
-                    0: cards_in_hand[0],
-                    1: cards_in_hand[1],
-                    2: cards_in_hand[2]
+                    cards_in_hand
                 },
                 cards_on_table: {
-                    0: cards_on_table[0],
-                    1: cards_on_table[1],
-                    2: cards_on_table[2]
+                    cards_on_table
                 }
             });
         }
@@ -66,7 +62,7 @@ class ModelGameClient {
     wait() {
         let cur_class = this;
         let val_changed = this.ref.on('value', function (snapshot) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             if (snapshot.val().cur_num === snapshot.val().max_num) {
                 cur_class.ref.off('value', val_changed);
                 cur_class.field.setPlayers(snapshot.val().users);
@@ -78,10 +74,10 @@ class ModelGameClient {
     getDeck() {
         let cur_class = this;
         let val_changed = this.ref.on('value', function (snapshot) {
-            console.log(snapshot.val());
+            //console.log(snapshot.val());
             let data = snapshot.val();
             let l_index = cur_class.field.players.length - 1;
-            if (data.user_cards[l_index] !== undefined) {
+            if (data.user_cards !== undefined && data.user_cards[l_index] !== undefined) {
                 console.log("getDeck if");
                 cur_class.ref.off('value', val_changed);
                 cur_class.field.setPlayersCards(data.user_cards);
