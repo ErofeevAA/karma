@@ -13,7 +13,11 @@ class ModelGameHost {
             console.log(snapshot.val());
             if (snapshot.val().cur_num === snapshot.val().max_num) {
                 cur_class.ref.off('value', function (s){});
-                cur_class.play(snapshot.val().users);
+                let users = [];
+                for (let i = 0; i < snapshot.val().users.length; ++i) {
+                    users.push(snapshot.val().users[0].name);
+                }
+                cur_class.play(users);
             }
         });
     }
@@ -34,7 +38,7 @@ class ModelGameHost {
             for (let j = 0; j < this.field.players[i].cards_on_table; ++j) {
                 cards_on_table.push(this.field.players[i].cards_on_table[j].name);
             }
-            this.ref.orderByChild("users/" + i).update({
+            this.ref.orderByChild("users/" + i).set({
                 cards_in_hand: cards_in_hands,
                 cards_on_table: cards_on_table
             });
@@ -58,8 +62,12 @@ class ModelGameClient {
             console.log(snapshot.val());
             if (snapshot.val().cur_num === snapshot.val().max_num) {
                 cur_class.ref.off('value', function (s){});
-                cur_class.field.setPlayers(snapshot.val().users);
-                cur_class.getDeck(snapshot.users);
+                let users = [];
+                for (let i = 0; i < snapshot.val().users.length; ++i) {
+                    users.push(snapshot.val().users[0].name);
+                }
+                cur_class.field.setPlayers(users);
+                cur_class.getDeck();
             }
         });
     }
