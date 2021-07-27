@@ -13,7 +13,7 @@ class ModelGameHost {
             console.log(snapshot.val());
             if (snapshot.val().cur_num === snapshot.val().max_num) {
                 cur_class.ref.off('value', function (s){});
-                cur_class.play(snapshot.users);
+                cur_class.play(snapshot.val().users);
             }
         });
     }
