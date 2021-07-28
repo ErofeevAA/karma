@@ -26,7 +26,6 @@ body {
     display: flex;
     flex-direction: column;
     z-index: 2;
-    margin-left: 330px;
     margin-top: 100px;
     left: 300px;
     top: 100px;
@@ -64,15 +63,17 @@ body {
     z-index: 1;
     left: 0;
     top: 0;
-    width: 800px;
-    height: 600px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .menu-block {
     display: flex;
     flex-direction: column;
     z-index: 2;
-    margin-left: 550px;
     margin-top: 100px;
     left: 300px;
     top: 150px;
@@ -100,7 +101,6 @@ body {
 }
 
 .rules-block {
-    margin-left: 200px;
     margin-top: 70px;
     width:940px;
     background:  #0B0C10;
@@ -112,7 +112,6 @@ body {
 }
 
 .list-rooms-block {
-    margin-left: 210px;
     display: flex;
     flex-direction: column;
     width: 900px;
@@ -147,7 +146,6 @@ p {
 }
 
 form {
-    margin-left: 20px;
     margin-top: 60px;
     text-align: center;
 }
