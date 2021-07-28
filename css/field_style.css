@@ -1,0 +1,68 @@
+.game-field-block {
+    width: 1340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: cornsilk;
+}
+
+.img-card {
+    width: 90px;
+}
+
+.not-belong-players-block {
+    color: cornsilk;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.discard-pile {
+
+}
+
+.cards-in-fight {
+
+}
+
+.deck {
+    background-color: rgba(148, 72, 6, 0.4);
+    border: #0B0C10 solid;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-on-table {
+    background-color: rgba(148, 72, 6, 0.4);
+    width: 40%;
+    border: #0B0C10 solid;
+    border-radius: 7px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.card-in-hand-block {
+    max-width: 60%;
+}
+
+.card-in-hand-opponent-block {
+    max-width: 30%;
+}
+
+.img-card-in-hand-opponent {
+    width: 40px;
+}
+
+.player-block {
+    background-color: rgba(97, 47, 4, 0.5);
+    border: #0B0C10 solid;
+    border-radius: 7px;
+}
