@@ -1,3 +1,7 @@
+body {
+    background-image: url("../assets/for_players.jpg");
+}
+
 .game-field-block {
     width: 1340px;
     display: flex;
