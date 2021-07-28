@@ -5,6 +5,7 @@
     justify-content: space-between;
     align-items: center;
     color: cornsilk;
+    margin: 5px 0;
 }
 
 .img-card {
@@ -38,7 +39,7 @@
     align-items: center;
 }
 
-.card-on-table {
+.cards-on-table-block {
     background-color: rgba(148, 72, 6, 0.4);
     width: 40%;
     border: #0B0C10 solid;
@@ -49,11 +50,19 @@
     align-items: center;
 }
 
-.card-in-hand-block {
+.player-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cards-in-hand-block {
     max-width: 60%;
 }
 
-.card-in-hand-opponent-block {
+.cards-in-hand-opponent-block {
     max-width: 30%;
 }
 
@@ -61,7 +70,7 @@
     width: 40px;
 }
 
-.player-block {
+.player-name-block {
     background-color: rgba(97, 47, 4, 0.5);
     border: #0B0C10 solid;
     border-radius: 7px;
