@@ -55,6 +55,8 @@ function menu() {
 }
 
 function multiplayer() {
+    let draw_train = new DrawTrain(g_canvas);
+    draw_train.drawTrain();
     console.log("multiplayer");
     g_game_div.removeChild(g_block);
     g_block = document.createElement('div');
@@ -66,6 +68,8 @@ function multiplayer() {
 function callbackOutputRooms() {
     console.log("callbackGetRooms");
 
+    let table_block = document.createElement('div');
+    table_block.className = 'table_block';
     let row = document.createElement('div');
     row.className = "list-rooms-row";
     let col1 = create_col('p', "col-head", g_model.table[0].host);
@@ -73,7 +77,7 @@ function callbackOutputRooms() {
 
     row.appendChild(col1);
     row.appendChild(col2);
-    g_block.appendChild(row);
+    table_block.appendChild(row);
 
     for (let i = 1; i < g_model.table.length; ++i) {
         let row = document.createElement('div');
@@ -92,7 +96,8 @@ function callbackOutputRooms() {
         row.appendChild(col1);
         row.appendChild(col2);
         row.appendChild(btn);
-        g_block.appendChild(row);
+        table_block.appendChild(row);
+        g_block.appendChild(table_block);
     }
     let create_room = document.createElement('button');
     create_room.className = g_model.btn_create_room.class_name;

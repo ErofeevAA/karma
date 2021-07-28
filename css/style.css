@@ -84,30 +84,34 @@ body {
     height: 600px;
 }
 
+.table_block {
+    width: 900px;
+    margin-top: 70px;
+    background: #0B0C10;
+    border: 1px solid  #1B1C12;
+    height: 100%;
+    max-height:350px;
+    overflow: auto;
+    padding: 15px;
+}
+
 .rules-block {
     margin-left: 200px;
     margin-top: 70px;
     width:940px;
-    height:450px;
     background:  #0B0C10;
     border: 1px solid  #1B1C12;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    height: 100%;
+    max-height:440px;
+    overflow: auto;
     padding: 15px;
 }
 
 .list-rooms-block {
+    margin-left: 210px;
     display: flex;
     flex-direction: column;
-    width: 940px;
-    margin-left: 200px;
-    margin-top: 70px;
-    height:350px;
-    background:  #0B0C10;
-    border: 1px solid  #1B1C12;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    padding: 15px;
+    width: 900px;
 }
 
 .list-rooms-row {
@@ -119,8 +123,8 @@ body {
 .col-head {
     margin: 30px 0;
     color: #C5C6C7;
-    font: 20pt Megrim;
-    width: 940px;
+    font: 20pt Satisfy;
+    width: 900px;
 
 }
 
@@ -128,12 +132,12 @@ body {
     width: 940px;
     margin: 10px 0;
     color: white;
-    font: 12pt Megrim;
+    font: 12pt Satisfy;
 }
 
 p {
     border: 0;
-    font: 20pt Megrim;
+    font: 20pt Satisfy;
     color: #C5C6C7;
 }
 
