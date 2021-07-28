@@ -91,41 +91,49 @@ body {
     height:450px;
     background:  #0B0C10;
     border: 1px solid  #1B1C12;
-    overflow-x: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     padding: 15px;
 }
 
 .list-rooms-block {
     display: flex;
     flex-direction: column;
-    width: 400px;
+    width: 940px;
+    margin-left: 200px;
+    margin-top: 70px;
+    height:350px;
+    background:  #0B0C10;
+    border: 1px solid  #1B1C12;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 15px;
 }
 
 .list-rooms-row {
-    width: 800px;
     text-align: center;
     display: flex;
     flex-direction: row;
 }
 
 .col-head {
-    margin: 20px 0;
-    color: white;
-    font: italic 15pt Satisfy;
-    width: 200px;
+    margin: 30px 0;
+    color: #C5C6C7;
+    font: 20pt Megrim;
+    width: 940px;
 
 }
 
 .col-row {
-    width: 200px;
+    width: 940px;
     margin: 10px 0;
     color: white;
-    font: 12pt Satisfy;
+    font: 12pt Megrim;
 }
 
 p {
     border: 0;
-    font: 20pt Satisfy;
+    font: 20pt Megrim;
     color: #C5C6C7;
 }
 
