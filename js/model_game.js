@@ -67,6 +67,7 @@ class ModelGame {
         img.alt = "";
         let p = document.createElement('p');
         p.className = "num-deck";
+        p.innerText = String(this.field.deck.length);
         block.appendChild(img);
         block.appendChild(p);
         return block;
