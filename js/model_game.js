@@ -102,13 +102,14 @@ class ModelGame {
     createOpponentInHandBlock(cards_length) {
         let block = document.createElement("div")
         block.className = "cards-in-hand-opponent-block";
-        for (let i = 0; i < cards_length; ++i) {
-            let img = document.createElement('img');
-            img.className = "img-card-in-hand-opponent";
-            img.src = ModelGameEnum.CARD_SHIRT_PATH;
-            img.alt = "";
-            block.appendChild(img);
-        }
+        /*let img = document.createElement('img');
+        img.className = "img-card-in-hand-opponent";
+        img.src = ModelGameEnum.CARD_SHIRT_PATH;
+        img.alt = "";
+        block.appendChild(img);*/
+        let p = document.createElement("num-cards-hand-opponent");
+        p.innerText = "Число карт: " + cards_length;
+        block.appendChild(p);
         return block;
     }
 
