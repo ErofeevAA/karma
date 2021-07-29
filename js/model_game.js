@@ -76,7 +76,7 @@ class ModelGame {
         block.className = "player-block";
         block.id = this.genBlockId(player.name, index);
         let player_name_block = this.createPlayerNameBlock(player.name);
-        let in_hand_block = this.createOpponentInHandBlock(this.field.players.cards_in_hand.length);
+        let in_hand_block = this.createOpponentInHandBlock(player.cards_in_hand.length);
         let on_table_block = this.createCardsOpponentOnTable(player.cards_on_table);
         block.appendChild(player_name_block);
         block.appendChild(in_hand_block);
