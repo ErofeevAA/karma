@@ -53,8 +53,7 @@ class Field {
     init(names) {
         for (let i = 0; i < 2; ++i) {
             for (let j = 1; j < 17; ++j) {
-                let path = CardsEnum.PATH_TO_NUM + j + ".png";
-                this.deck.push(new NumCard(path, j));
+                this.deck.push(new NumCard(j));
             }
             this.deck.push(new KarmaCard(CardsEnum.GIVE_STACK));
             this.deck.push(new KarmaCard(CardsEnum.PLAY_CARD));
@@ -93,8 +92,8 @@ class Field {
                 this.players[i].cards_in_hand.push(this.typeCard(cards[i].cards_in_hand[j]));
             }
             for (let j = 0; j < cards[i].cards_on_table.length; ++j) {
-                this.players[i].cards_on_table = this.typeCard(cards[i].cards_on_table[j][0],
-                    cards[i].cards_on_table[j][1]);
+                this.players[i].cards_on_table.push([this.typeCard(cards[i].cards_on_table[j][0]),
+                    this.typeCard(cards[i].cards_on_table[j][1])]);
             }
         }
     }
