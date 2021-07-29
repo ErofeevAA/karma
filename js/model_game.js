@@ -162,7 +162,7 @@ class ModelGame {
         let block = document.createElement('div');
         block.className = "player-name-block";
         let p = document.createElement('p');
-        p.className = "player-name-text"
+        p.className = "player-name-text";
         p.innerText = name;
         block.appendChild(p);
         return block;
