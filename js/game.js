@@ -45,12 +45,14 @@ function menu() {
     let b_multiplayer = initButton(g_model.btn_multiplayer, multiplayer);
     let b_single = initButton(g_model.btn_single, single_play);
     let b_train = initButton(g_model.btn_train, train);
+    let b_parameters = initButton(g_model.btn_parameters, parameters);
     let b_about = initButton(g_model.btn_about, about);
 
     g_block.appendChild(header);
     g_block.appendChild(b_multiplayer);
     g_block.appendChild(b_single);
     g_block.appendChild(b_train);
+    g_block.appendChild(b_parameters);
     g_block.appendChild(b_about);
 }
 
@@ -194,6 +196,20 @@ function train() {
     g_block.appendChild(rules_block);
     g_block.appendChild(b_menu);
     g_game_div.appendChild(g_block);
+}
+
+function parameters() {
+    let draw_parameters = new DrawParameters(g_canvas);
+    draw_parameters.drawParameters();
+    g_game_div.removeChild(g_block);
+    g_block = document.createElement('div');
+    g_block.className = "parameters-block";
+    g_model = new ModelParameters();
+    g_game_div.appendChild(g_block);
+
+    let b_menu = initButton(g_model.btn_menu, menu);
+
+    g_block.appendChild(b_menu);
 }
 
 function about() {
