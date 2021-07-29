@@ -106,8 +106,8 @@ const PlayerState = {
 };
 
 const CardsEnum = {
-    PATH_TO_NUM: "assets/playing_cards/number_cards",
-    PATH_TO_KARMA: "assets/playing_cards/karma_cards",
+    PATH_TO_NUM: "../assets/playing_cards/number_cards",
+    PATH_TO_KARMA: "../assets/playing_cards/karma_cards",
     GIVE_STACK: "give_a_stack",
     PLAY_CARD: "play_a_card_from_the_table",
     BOTTOM_TOP: "from_bottom_to_top",
