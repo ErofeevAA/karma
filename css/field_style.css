@@ -9,6 +9,7 @@
 
 .img-card {
     width: 90px;
+    height: auto;
 }
 
 .not-belong-players-block {
@@ -51,6 +52,7 @@
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
+    min-height: 90px;
 }
 
 .player-block {
@@ -101,6 +103,7 @@
 
 .num-cards-hand-opponent {
     font: 12pt Satisfy;
+    margin: 0;
 }
 
 .player-name-text {

@@ -107,7 +107,8 @@ class ModelGame {
         img.src = ModelGameEnum.CARD_SHIRT_PATH;
         img.alt = "";
         block.appendChild(img);*/
-        let p = document.createElement("num-cards-hand-opponent");
+        let p = document.createElement('p');
+        p.className = "num-cards-hand-opponent";
         p.innerText = "Число карт: " + cards_length;
         block.appendChild(p);
         return block;
