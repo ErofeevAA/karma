@@ -85,6 +85,10 @@
     border-radius: 7px;
 }
 
+.num-deck {
+    font: 12pt Satisfy;
+}
+
 .player-name-text {
     font: 12pt Satisfy;
 }
