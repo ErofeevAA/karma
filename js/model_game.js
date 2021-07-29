@@ -63,6 +63,7 @@ class ModelGame {
         block.className = "deck-block";
         let img = document.createElement('img');
         img.src = ModelGameEnum.CARD_SHIRT_PATH;
+        img.className = "img-card";
         img.alt = "";
         let p = document.createElement('p');
         p.className = "num-deck";
