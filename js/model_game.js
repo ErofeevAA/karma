@@ -15,7 +15,7 @@ class ModelGame {
             }
             this.main_block.appendChild(this.createOpponentBlock(player, i));
         }
-        this.main_block(this.createNotBelongPlayersBlock());
+        this.main_block.appendChild(this.createNotBelongPlayersBlock());
         let player = this.field.players[this.num_player];
         this.main_block.appendChild(this.createPlayerBlock(player));
     }
