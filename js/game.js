@@ -142,8 +142,7 @@ function callbackCreateRoom() {
 }
 
 function netGame() {
-    g_game_div.removeChild(g_block);
-    g_block = document.createElement('div');
+
 }
 
 function single_play() {
