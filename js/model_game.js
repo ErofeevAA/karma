@@ -133,7 +133,7 @@ class ModelGame {
             img.className = "img-card";
             img.src = cards[i][last].image_path;
             img.alt = String(i);
-            img.addEventListener('click', function (e) {
+            img.addEventListener('click', function () {
                 console.log(img.alt + ' ' + cards[i][last].name);
             })
             block.appendChild(img);
@@ -149,7 +149,7 @@ class ModelGame {
             img.className = "img-card";
             img.src = cards[i].image_path;
             img.alt = String(i);
-            img.addEventListener("click", function (e) {
+            img.addEventListener("click", function () {
                 console.log(img.alt + ' ' + cards[i].name);
             });
             block.appendChild(img);
