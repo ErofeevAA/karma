@@ -21,15 +21,17 @@
     align-items: center;
 }
 
-.discard-pile {
-
+.discard-pile-block {
+    min-width: 90px;
 }
 
-.cards-in-fight {
-
+.cards-in-fight-block {
+    min-width: 90px;
 }
 
-.deck {
+.deck-block {
+    min-width: 90px;
+    min-height: 100px;
     background-color: rgba(148, 72, 6, 0.4);
     border: #0B0C10 solid;
     border-radius: 7px;

@@ -34,6 +34,7 @@ class Field {
 
     constructor() {
         this.players = [];
+        this.discard_pile = [];
         this.deck = [];
         this.cards_in_fight = [];
     }
@@ -62,6 +63,11 @@ class Field {
         }
         let num_attacker = Math.floor(Math.random() * this.players.length);
         this.players[num_attacker].state = PlayerState.ATTACKER;
+        if (num_attacker + 1 === this.players.length) {
+            this.players[0].state = PlayerState.DEFENDER;
+        } else {
+            this.players[num_attacker + 1].state = PlayerState.DEFENDER;
+        }
     }
 
     setPlayers(names) {
