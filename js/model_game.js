@@ -265,5 +265,5 @@ class ModelGameClient extends ModelGame {
 }
 
 const ModelGameEnum = {
-    CARD_SHIRT_PATH: "../assets/playing_cards/card_shirt.png"
+    CARD_SHIRT_PATH: "assets/playing_cards/card_shirt.png"
 };

@@ -1,22 +1,33 @@
 class Card {
 
-    constructor(img_path, name) {
-        this.image_path = img_path;
+    constructor(name) {
+        this.image_path = "";
         this.name = name;
+        this.genPath();
     }
+
+    genPath(){}
 }
 
 class NumCard extends Card {
 
-    constructor(img_path, num) {
-        super(img_path, num);
+    constructor(num) {
+        super(num);
+    }
+
+    genPath() {
+        this.image_path = "assets/playing_cards/number_cards/" + this.name + ".png";
     }
 }
 
 class KarmaCard extends Card {
 
-    constructor(img_path, name) {
-        super(img_path, name);
+    constructor(name) {
+        super(name);
+    }
+
+    genPath() {
+        this.image_path = "assets/playing_cards/karma_cards" + this.name + ".png";
     }
 }
 
@@ -45,10 +56,10 @@ class Field {
                 let path = CardsEnum.PATH_TO_NUM + j + ".png";
                 this.deck.push(new NumCard(path, j));
             }
-            this.pushKarmaCard(CardsEnum.GIVE_STACK);
-            this.pushKarmaCard(CardsEnum.PLAY_CARD);
-            this.pushKarmaCard(CardsEnum.BOTTOM_TOP);
-            this.pushKarmaCard(CardsEnum.FIVE_OR_LESS);
+            this.deck.push(new KarmaCard(CardsEnum.GIVE_STACK));
+            this.deck.push(new KarmaCard(CardsEnum.PLAY_CARD));
+            this.deck.push(new KarmaCard(CardsEnum.BOTTOM_TOP));
+            this.deck.push(new KarmaCard(CardsEnum.FIVE_OR_LESS));
         }
 
         this.randomizeDeck();
@@ -78,9 +89,18 @@ class Field {
 
     setPlayersCards(cards) {
         for (let i = 0; i < this.players.length; ++i) {
-            this.players[i].cards_in_hand = cards[i].cards_in_hand;
-            this.players[i].cards_on_table = cards[i].cards_on_table;
+            for (let j = 0; j < cards[i].cards_in_hand.length; ++j) {
+                this.players[i].cards_in_hand.push(this.typeCard(cards[i].cards_in_hand[j]));
+            }
+            for (let j = 0; j < cards[i].cards_on_table.length; ++j) {
+                this.players[i].cards_on_table = this.typeCard(cards[i].cards_on_table[j][0],
+                    cards[i].cards_on_table[j][1]);
+            }
         }
+    }
+
+    typeCard(card) {
+        return (typeof card === 'number') ? new NumCard(card) : new KarmaCard(card);
     }
 
     randomizeDeck() {
@@ -93,11 +113,6 @@ class Field {
             }
         }
     }
-
-    pushKarmaCard(name) {
-        let path = CardsEnum.PATH_TO_KARMA + name + '.png'
-        this.deck.push(new KarmaCard(path, name));
-    }
 }
 
 const PlayerState = {
@@ -106,8 +121,6 @@ const PlayerState = {
 };
 
 const CardsEnum = {
-    PATH_TO_NUM: "../assets/playing_cards/number_cards",
-    PATH_TO_KARMA: "../assets/playing_cards/karma_cards",
     GIVE_STACK: "give_a_stack",
     PLAY_CARD: "play_a_card_from_the_table",
     BOTTOM_TOP: "from_bottom_to_top",
