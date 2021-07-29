@@ -119,6 +119,10 @@ function callbackOutputRooms() {
 function callBackChooseRoom() {
     if (g_model.list_rooms[g_num_room]) {
         g_model.connectToRoom(g_num_room, g_player_name);
+        g_game_div.removeChild(g_block);
+        g_block = document.createElement('div');
+        g_block.className = "game-field-block";
+        g_game_div.appendChild(g_block);
         g_model = new ModelGameClient(g_num_room, g_block, g_player_name);
         netGame();
         return;
@@ -129,6 +133,10 @@ function callBackChooseRoom() {
 function callbackCreateRoom() {
     g_num_room = g_model.findFreeNum();
     g_model.createRoom(g_num_room, g_player_name, 2);
+    g_game_div.removeChild(g_block);
+    g_block = document.createElement('div');
+    g_block.className = "game-field-block";
+    g_game_div.appendChild(g_block);
     g_model = new ModelGameHost(g_num_room, g_block, g_player_name);
     netGame();
 }
