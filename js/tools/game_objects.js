@@ -27,7 +27,7 @@ class KarmaCard extends Card {
     }
 
     genPath() {
-        this.image_path = "assets/playing_cards/karma_cards" + this.name + ".png";
+        this.image_path = "assets/playing_cards/karma_cards/" + this.name + ".png";
     }
 }
 
