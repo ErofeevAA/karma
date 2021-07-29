@@ -100,7 +100,7 @@ body {
 .table_block {
     width: 900px;
     margin-top: 70px;
-    background: #0B0C10;
+    background: #0B0C10A0;
     border: 1px solid  #1B1C12;
     height: 100%;
     max-height:350px;
@@ -120,7 +120,7 @@ body {
     max-height:440px;
     overflow: auto;
     padding: 15px;
-    scrollbar-color: #0A4C95 #C2D2E400;
+    scrollbar-color: #6DC0C8 #C2D2E400;
     scrollbar-width: thin;
 }
 
@@ -163,32 +163,32 @@ form {
     text-align: center;
 }
 
-.rules-block, .table_block ::-webkit-scrollbar-button {
+.rules-block::-webkit-scrollbar-button, .table_block::-webkit-scrollbar-button {
     background-repeat: no-repeat;
     width: 5px;
     height: 0;
 }
 
-.rules-block, .table_block ::-webkit-scrollbar-track {
+.rules-block::-webkit-scrollbar-track, .table_block::-webkit-scrollbar-track {
     background-color: #ECEDEE00;
 }
 
-.rules-block, .table_block ::-webkit-scrollbar-thumb {
+.rules-block::-webkit-scrollbar-thumb, .table_block::-webkit-scrollbar-thumb {
     -webkit-border-radius: 0;
     border-radius: 0;
     background-color: #6DC0C8;
 }
 
-.rules-block, .table_block ::-webkit-scrollbar-thumb:hover {
+.rules-block::-webkit-scrollbar-thumb:hover, .table_block::-webkit-scrollbar-thumb:hover {
     background-color: #56999F;
 }
 
-.rules-block, .table_block ::-webkit-resizer {
+.rules-block::-webkit-resizer, .table_block::-webkit-resizer {
     background-repeat: no-repeat;
     width: 4px;
     height: 0;
 }
 
-.rules-block, .table_block ::-webkit-scrollbar {
+.rules-block::-webkit-scrollbar, .table_block::-webkit-scrollbar {
     width: 4px;
 }
