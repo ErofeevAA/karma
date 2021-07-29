@@ -193,6 +193,7 @@ class ModelGameHost extends ModelGame {
 
     init(names) {
         this.field.init(names);
+        this.initBlocks();
         this.sendDeck();
     }
 
@@ -210,13 +211,9 @@ class ModelGameHost extends ModelGame {
                 tmp.push(this.field.players[i].cards_on_table[j][1].name);
                 cards_on_table.push(tmp);
             }
-            this.ref.child("user_cards/" + i).set({
-                cards_in_hand: {
-                    cards_in_hand
-                },
-                cards_on_table: {
-                    cards_on_table
-                }
+            this.ref.child("user_cards/").set({
+                cards_in_hand,
+                cards_on_table
             });
         }
     }
@@ -240,7 +237,7 @@ class ModelGameClient extends ModelGame {
                 cur_class.ref.off('value', val_changed);
                 let users = snapshot.val().users;
                 cur_class.field.setPlayers(users);
-                for (let i = 0; i < user.length; ++i) {
+                for (let i = 0; i < users.length; ++i) {
                     if (cur_class.name === users[i]) {
                         cur_class.num_player = i;
                         break;
