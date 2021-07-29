@@ -1,7 +1,7 @@
 class ModelGame {
     constructor(num_room, block, name) {
         this.name = name;
-        this.num_player = -1;
+        this.num_player = 0;
         this.main_block = block;
         this.field = new Field();
         this.ref = firebase.database().ref("rooms/" + num_room);
@@ -211,7 +211,7 @@ class ModelGameHost extends ModelGame {
                 tmp.push(this.field.players[i].cards_on_table[j][1].name);
                 cards_on_table.push(tmp);
             }
-            this.ref.child("user_cards/").set({
+            this.ref.child("user_cards/" + i).set({
                 cards_in_hand,
                 cards_on_table
             });
