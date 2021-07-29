@@ -90,7 +90,7 @@ class ModelGame {
         block.className = "player-block";
         block.id = this.genBlockId(player.name, this.num_player);
         let on_table_block = this.createCardsOnTable(player.cards_on_table);
-        let in_hand_block = this.createCardsInHandBlock(this.field.players.length);
+        let in_hand_block = this.createCardsInHandBlock(player.cards_in_hand);
         let player_name_block = this.createPlayerNameBlock(player.name);
         block.appendChild(on_table_block);
         block.appendChild(in_hand_block);
