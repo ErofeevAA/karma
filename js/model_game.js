@@ -291,7 +291,7 @@ class ModelGame {
 
     updateDiscardPile() {
         let block = document.getElementById("discard-pile-block");
-        if (this.field.discard_pile) {
+        if (this.field.discard_pile && block.childNodes.length === 0) {
             let img = document.createElement('img');
             img.className = "img-card";
             img.alt = "";
@@ -379,6 +379,7 @@ class ModelGame {
                 } else {
                     cur_class.field.move(data.step);
                 }
+                cur_class.updateKarmaCardsInFightBlock();
                 cur_class.updateCardsInFightBlock();
                 cur_class.updateInHand();
                 cur_class.updateBordersColor();
