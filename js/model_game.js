@@ -220,8 +220,8 @@ class ModelGame {
     updateInHand() {
         let block = document.getElementById("cards-in-hand-block");
         let nodes = block.getElementsByClassName("img-card");
-        console.log("nodes cards-in-hands");
-        console.log(nodes);
+        //console.log("nodes cards-in-hands");
+        //console.log(nodes);
         for (let i = 0; i < nodes.length; ++i) {
             if (nodes[i].alt !== i) {
                 nodes[i].alt = String(i);
@@ -256,12 +256,18 @@ class ModelGame {
             this.field.cardNoLessInFight(card, index);
             //this.updateInHand();
             this.updateDeck();
+            for (let i = 0; i < this.field.players.length; ++i) {
+                if (i === this.num_player) {
+                    this.updateNumOpponentCards(i);
+                }
+            }
             this.updateCardsInFightBlock();
             return true;
         }
         if (this.field.cards_in_fight[last].name === card.name) {
             this.field.cardsEqualsInFight(index, this.num_player);
             this.updateDeck();
+            this.updateCardsInFightBlock();
             //this.updateInHand();
             return true;
         }
@@ -288,6 +294,8 @@ class ModelGame {
                 }
                 cur_class.field.move(data.step);
                 cur_class.updateCardsInFightBlock();
+                cur_class.updateInHand();
+                cur_class.updateDeck();
                 cur_class.updateNumOpponentCards(data.player);
             }
         });

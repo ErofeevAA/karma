@@ -151,6 +151,7 @@ class Field {
                 return;
             }
             if (move === this.cards_in_fight[last].name) {
+                //console.log("if equals");
                 this.cardsEqualsInFight(index);
             }
         }
