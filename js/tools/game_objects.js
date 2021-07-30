@@ -140,12 +140,13 @@ class Field {
         if (typeof move === 'number') {
             let last = this.cards_in_fight.length - 1;
             let cards = this.players[this.num_attacker].cards_in_hand;
+            let index = this.getIndexCard(cards, move);
             if (last === -1 || move > this.cards_in_fight[last]) {
-                this.cardNoLessInFight(cards, this.getIndexCard(cards, move));
+                this.cardNoLessInFight(cards[index], index);
                 return;
             }
             if (move === this.cards_in_fight[last]) {
-                this.cardsEqualsInFight(this.getIndexCard(cards, move));
+                this.cardsEqualsInFight(index);
             }
         }
     }
