@@ -255,7 +255,7 @@ class ModelGame {
                     return;
                 }
                 cur_class.field.move(data.step);
-                cur_class.updateInHand();
+                cur_class.createDeck();
                 cur_class.updateNumOpponentCards(data.player);
             }
         });
