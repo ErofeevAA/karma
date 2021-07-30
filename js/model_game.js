@@ -174,7 +174,7 @@ class ModelGame {
         }
         if (index === this.num_player) {
             let cur_class = this;
-            block.addEventListener('onclick', function () {
+            block.addEventListener('click', function () {
                 if (cur_class.field.players[cur_class.num_player].state === PlayerState.DEFENDER &&
                 cur_class.field.cards_in_fight.length !== 0) {
                     console.log("Взяяяяять");
