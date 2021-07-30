@@ -82,7 +82,7 @@ class ModelGame {
         let block = document.createElement('div');
         block.className = "player-block";
         //block.id = this.genBlockId(player.name, index);
-        let player_name_block = this.createPlayerNameBlock(player.name);
+        let player_name_block = this.createPlayerNameBlock(player.name, index);
         let in_hand_block = this.createOpponentInHandBlock(player.cards_in_hand.length);
         let on_table_block = this.createCardsOpponentOnTable(player.cards_on_table);
         block.appendChild(player_name_block);
@@ -94,7 +94,7 @@ class ModelGame {
     createPlayerBlock(player) {
         let block = document.createElement('div');
         block.className = "player-block";
-        //block.id = this.genBlockId(player.name, this.num_player);
+        //block.id = "player-block";
         let on_table_block = this.createCardsOnTable(player.cards_on_table);
         let in_hand_block = this.createCardsInHandBlock(player.cards_in_hand);
         let player_name_block = this.createPlayerNameBlock(player.name);
@@ -165,9 +165,13 @@ class ModelGame {
         return block;
     }
 
-    createPlayerNameBlock(name) {
+    createPlayerNameBlock(name, index=this.num_player) {
         let block = document.createElement('div');
         block.className = "player-name-block";
+        block.id = "player-name-block" + index;
+        if (index === this.field.num_attacker) {
+            block.style.borderColor = ModelGameEnum.COLOR_ATTACK;
+        }
         let p = document.createElement('p');
         p.className = "player-name-text";
         p.innerText = name;
@@ -238,6 +242,17 @@ class ModelGame {
         p.innerText = "Число карт: " + this.field.players[num].cards_in_hand.length;
     }
 
+    updateBordersColor() {
+        for (let i = 0; i < this.field.players.length; ++i) {
+            let block = document.getElementById("player-name-block" + i);
+            if (this.field.players[i].state === PlayerState.ATTACKER) {
+                block.style.borderColor = ModelGameEnum.COLOR_ATTACK;
+                continue;
+            }
+            block.style.borderColor = ModelGameEnum.COLOR_NOT_ATTACK;
+        }
+    }
+
     chosenCardFromTable(index) {
 
     }
@@ -246,6 +261,7 @@ class ModelGame {
         if (this.field.players[this.num_player].state === PlayerState.DEFENDER) {
             return false;
         }
+        this.updateBordersColor();
         let card = this.field.players[this.num_player].cards_in_hand[index];
         if (card instanceof KarmaCard) {
             return false;
@@ -257,7 +273,7 @@ class ModelGame {
             //this.updateInHand();
             this.updateDeck();
             for (let i = 0; i < this.field.players.length; ++i) {
-                if (i === this.num_player) {
+                if (i !== this.num_player) {
                     this.updateNumOpponentCards(i);
                 }
             }
@@ -451,5 +467,7 @@ class ModelGameClient extends ModelGame {
 
 const ModelGameEnum = {
     CARD_SHIRT_PATH: "assets/playing_cards/card_shirt.png",
-    ABANDON: "abandon"
+    ABANDON: "abandon",
+    COLOR_ATTACK: "red",
+    COLOR_NOT_ATTACK: "#0B0C10"
 };
