@@ -388,10 +388,11 @@ class ModelGameClient extends ModelGame {
     }
 
     getNumFirstAttacker() {
+        let curr_class = this;
         let val_changed = this.ref.child('num_first_attacker').on('value', function (snapshot) {
             let data = snapshot.val();
             if (data !== null && data !== undefined) {
-                this.ref.child('num_first_attacker').off('value', val_changed);
+                curr_class.ref.child('num_first_attacker').off('value', val_changed);
                 this.field.num_attacker = Number(data);
                 this.field.num_first_attacker = Number(data);
             }
