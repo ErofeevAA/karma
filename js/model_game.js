@@ -224,6 +224,12 @@ class ModelGame {
 
     updateInHand() {
         let block = document.getElementById("cards-in-hand-block");
+        let nodes = block.getElementsByClassName("img-card");
+        for (let i = 0; i < nodes.length; ++i) {
+            if (nodes[i].alt !== i) {
+                nodes[i].alt = String(i);
+            }
+        }
         let cards = this.field.players[this.num_player].cards_in_hand;
         for (let i = block.childNodes.length - 1 ; i < cards.length; ++i) {
             this.appendImgCardToHand(block, cards[i], i);
@@ -232,7 +238,7 @@ class ModelGame {
 
     updateNumOpponentCards(num) {
         let p = document.getElementById("num-cards-hand-opponent");
-        p.innerText = "Число карт:" + this.field.players[num].cards_in_hand.length;
+        p.innerText = "Число карт: " + this.field.players[num].cards_in_hand.length;
     }
 
     chosenCardFromTable(index) {
