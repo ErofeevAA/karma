@@ -300,12 +300,22 @@ class ModelGame {
     }
 
     updateCardFromTable() {
-
+        let block = document.getElementById("cards-on-table-block");
+        let node = block.childNodes[block.childNodes.length - 1];
+        block.removeChild(node);
     }
 
-    chosenCardFromTable(index) {
-        this.field.takeFromTable(index);
+    updateCardOpponentFromTable() {
+        let block = document.getElementById("cards-on-table-opponent-block");
+        let node = block.childNodes[block.childNodes.length - 1];
+        block.removeChild(node);
+    }
+
+    chosenCardFromTable() {
+        this.field.takeFromTable();
         this.updateInHand();
+        this.updateCardFromTable();
+        this.sendMove(CardsEnum.PLAY_CARD);
     }
 
     chosenCardFromHand(index) {
@@ -355,14 +365,15 @@ class ModelGame {
 
     eventClickCardInHand(img, card, block) {
         console.log("click on hand" + img.alt + ' ' + card.name);
-        if (this.field.karma_in_game === undefined || this.field.karma_in_game.name === CardsEnum.GIVE_STACK) {
-            let res = this.chosenCardFromHand(img.alt);
-            if (res) {
-                block.removeChild(img);
-                this.updateInHand();
-                this.updateDiscardPile();
-                this.sendMove(card.name);
-            }
+        if (this.field.karma_in_game !== undefined && this.field.karma_in_game.name === CardsEnum.PLAY_CARD) {
+            return;
+        }
+        let res = this.chosenCardFromHand(img.alt);
+        if (res) {
+            block.removeChild(img);
+            this.updateInHand();
+            this.updateDiscardPile();
+            this.sendMove(card.name);
         }
     }
 
@@ -373,6 +384,10 @@ class ModelGame {
             if (data !== null && data !== undefined && data.step !== undefined) {
                 if (data.player === cur_class.num_player) {
                     return;
+                }
+                if (data.step === CardsEnum.PLAY_CARD) {
+                    cur_class.field.takeFromTable();
+                    cur_class.updateCardOpponentFromTable();
                 }
                 if (data.step === ModelGameEnum.ABANDON) {
                     cur_class.field.abandonCards(data.player);

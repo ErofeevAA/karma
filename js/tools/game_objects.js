@@ -192,11 +192,13 @@ class Field {
         //this.changeAttacker();
     }
 
-    takeFromTable(i) {
+    takeFromTable() {
+        this.karma_in_game = undefined;
+        let i = this.players[this.num_attacker].cards_in_hand.length - 1;
         this.karma_in_game = undefined;
         this.players[this.num_attacker].cards_in_hand.push(this.players[this.num_attacker].cards_on_table[i].pop());
         this.players[this.num_attacker].cards_in_hand.push(this.players[this.num_attacker].cards_on_table[i].pop());
-        this.players[this.num_attacker].cards_on_table[i].splice(i, 1);
+        this.players[this.num_attacker].cards_on_table[i].pop();
         this.changeAttacker();
     }
 
