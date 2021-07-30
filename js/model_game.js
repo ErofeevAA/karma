@@ -180,9 +180,6 @@ class ModelGame {
                     console.log("Взяяяяять");
                     cur_class.sendMove(ModelGameEnum.ABANDON);
                     cur_class.field.abandonCards(cur_class.num_player);
-                    if (cur_class.num_player === cur_class.field.num_first_attacker) {
-                        cur_class.field.changeFirstAttacker();
-                    }
                     cur_class.updateCardsInFightBlock();
                     cur_class.updateInHand();
                     cur_class.updateDeck();
