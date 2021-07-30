@@ -130,7 +130,7 @@ class Field {
 
     getIndexCard(cards, name) {
         for (let i = 0; i < cards.length; ++i) {
-            if (cards.name === name) {
+            if (cards[i].name === name) {
                 return i;
             }
         }
@@ -138,9 +138,12 @@ class Field {
 
     move(move) {
         if (typeof move === 'number') {
+            //console.log("move", move);
             let last = this.cards_in_fight.length - 1;
             let cards = this.players[this.num_attacker].cards_in_hand;
+            //console.log(cards);
             let index = this.getIndexCard(cards, move);
+            //console.log(index);
             if (last === -1 || move > this.cards_in_fight[last]) {
                 this.cardNoLessInFight(cards[index], index);
                 return;
@@ -156,8 +159,8 @@ class Field {
     }
 
     cardNoLessInFight(card, index) {
-        console.log("card");
-        console.log(card);
+        //console.log("card");
+        //console.log(card);
         this.cards_in_fight.push(card);
         this.players[this.num_attacker].cards_in_hand.splice(index, 1);
         this.changeAttacker();
