@@ -156,7 +156,7 @@ class Field {
         console.log("move", move);
         if (typeof move === "string") {
             if (move === CardsEnum.GIVE_STACK) {
-                this.karma_in_game = CardsEnum.GIVE_STACK;
+                this.karma_in_game = new KarmaCard(CardsEnum.GIVE_STACK);
                 this.changeAttacker();
             }
             return;
