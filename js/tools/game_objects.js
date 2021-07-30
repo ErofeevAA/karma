@@ -104,9 +104,12 @@ class Field {
         }
     }
 
-    setDeck(deck) {
-        for (let i = 0; deck.length; ++i) {
-            this.deck.push(this.typeCard(deck[i]));
+    setDeck(deck_name) {
+        console.log("setDeck");
+        console.log(deck_name);
+        for (let i = 0; i < deck_name.length; ++i) {
+            console.log(deck_name[i]);
+            this.deck.push(this.typeCard(deck_name[i]));
         }
     }
 
