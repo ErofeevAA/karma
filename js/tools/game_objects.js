@@ -138,7 +138,7 @@ class Field {
 
     abandonCards(num_player) {
         for (let i = 0; i < this.cards_in_fight.length; ++i) {
-            this.players[num_player].push(this.cards_in_fight.pop());
+            this.players[num_player].cards_in_hand.push(this.cards_in_fight.pop());
         }
     }
 
