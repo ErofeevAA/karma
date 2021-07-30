@@ -198,7 +198,7 @@ class Field {
         this.karma_in_game = undefined;
         this.players[this.num_attacker].cards_in_hand.push(this.players[this.num_attacker].cards_on_table[0].pop());
         this.players[this.num_attacker].cards_in_hand.push(this.players[this.num_attacker].cards_on_table[0].pop());
-        this.players[this.num_attacker].cards_on_table[i].pop();
+        this.players[this.num_attacker].cards_on_table[2].pop();
         this.changeAttacker();
     }
 
