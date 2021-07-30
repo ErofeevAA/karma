@@ -143,8 +143,11 @@ class ModelGame {
             img.alt = String(i);
             img.addEventListener('click', function () {
                 console.log(img.alt + ' ' + cards[i][last].name);
-                cur_class.chosenCardFromTable(img.alt);
-            })
+                if (cur_class.field.num_attacker === cur_class.num_player
+                    && cur_class.field.karma_in_game.name === CardsEnum.PLAY_CARD) {
+                    cur_class.chosenCardFromTable(img.alt);
+                }
+            });
             block.appendChild(img);
         }
         return block;
@@ -296,8 +299,13 @@ class ModelGame {
         }
     }
 
-    chosenCardFromTable(index) {
+    updateCardFromTable() {
 
+    }
+
+    chosenCardFromTable(index) {
+        this.field.takeFromTable(index);
+        this.updateInHand();
     }
 
     chosenCardFromHand(index) {
@@ -346,12 +354,14 @@ class ModelGame {
 
     eventClickCardInHand(img, card, block) {
         console.log("click on hand" + img.alt + ' ' + card.name);
-        let res = this.chosenCardFromHand(img.alt);
-        if (res) {
-            block.removeChild(img);
-            this.updateInHand();
-            this.updateDiscardPile();
-            this.sendMove(card.name);
+        if (this.field.karma_in_game === undefined) {
+            let res = this.chosenCardFromHand(img.alt);
+            if (res) {
+                block.removeChild(img);
+                this.updateInHand();
+                this.updateDiscardPile();
+                this.sendMove(card.name);
+            }
         }
     }
 
