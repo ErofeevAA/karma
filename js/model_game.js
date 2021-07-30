@@ -182,12 +182,7 @@ class ModelGame {
         img.alt = String(index);
         let cur_class = this;
         img.addEventListener("click", function () {
-            console.log("click on hand" + img.alt + ' ' + card.name);
-            let res = cur_class.chosenCardFromHand(img.alt);
-            if (res) {
-                block.removeChild(img);
-                cur_class.sendMove(card.name);
-            }
+            cur_class.eventClickCardInHand(img, card, block);
         });
         block.appendChild(img);
     }
@@ -225,6 +220,8 @@ class ModelGame {
     updateInHand() {
         let block = document.getElementById("cards-in-hand-block");
         let nodes = block.getElementsByClassName("img-card");
+        console.log("nodes cards-in-hands");
+        console.log(nodes);
         for (let i = 0; i < nodes.length; ++i) {
             if (nodes[i].alt !== i) {
                 nodes[i].alt = String(i);
@@ -257,7 +254,7 @@ class ModelGame {
         if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
             //console.log("less_or_no"+card.name);
             this.field.cardNoLessInFight(card, index);
-            this.updateInHand();
+            //this.updateInHand();
             this.updateDeck();
             this.updateCardsInFightBlock();
             return true;
@@ -265,10 +262,20 @@ class ModelGame {
         if (this.field.cards_in_fight[last].name === card.name) {
             this.field.cardsEqualsInFight(index, this.num_player);
             this.updateDeck();
-            this.updateInHand();
+            //this.updateInHand();
             return true;
         }
         return false;
+    }
+
+    eventClickCardInHand(img, card, block) {
+        console.log("click on hand" + img.alt + ' ' + card.name);
+        let res = this.chosenCardFromHand(img.alt);
+        if (res) {
+            //block.removeChild(img);
+            this.updateInHand();
+            this.sendMove(card.name);
+        }
     }
 
     waitMove() {
