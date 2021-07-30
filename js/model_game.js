@@ -313,13 +313,13 @@ class ModelGame {
             return false;
         }
         let card = this.field.players[this.num_player].cards_in_hand[index];
-        if (this.field.karma_in_game === CardsEnum.GIVE_STACK && card.name !== CardsEnum.GIVE_STACK) {
+        if (this.field.karma_in_game.name === CardsEnum.GIVE_STACK && card.name !== CardsEnum.GIVE_STACK) {
             return false;
         }
         if (card instanceof KarmaCard) {
             this.field.karmaCardsInFight(card, index);
             this.updateKarmaCardsInFightBlock();
-            return false;
+            return true;
         }
         let last = this.field.cards_in_fight.length - 1;
         if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
