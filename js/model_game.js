@@ -261,7 +261,6 @@ class ModelGame {
         if (this.field.players[this.num_player].state === PlayerState.DEFENDER) {
             return false;
         }
-        this.updateBordersColor();
         let card = this.field.players[this.num_player].cards_in_hand[index];
         if (card instanceof KarmaCard) {
             return false;
@@ -272,6 +271,7 @@ class ModelGame {
             this.field.cardNoLessInFight(card, index);
             //this.updateInHand();
             this.updateDeck();
+            this.updateBordersColor();
             for (let i = 0; i < this.field.players.length; ++i) {
                 if (i !== this.num_player) {
                     this.updateNumOpponentCards(i);
@@ -283,6 +283,7 @@ class ModelGame {
         if (this.field.cards_in_fight[last].name === card.name) {
             this.field.cardsEqualsInFight(index, this.num_player);
             this.updateDeck();
+            this.updateBordersColor();
             this.updateCardsInFightBlock();
             //this.updateInHand();
             return true;
@@ -311,6 +312,7 @@ class ModelGame {
                 cur_class.field.move(data.step);
                 cur_class.updateCardsInFightBlock();
                 cur_class.updateInHand();
+                cur_class.updateBordersColor();
                 cur_class.updateDeck();
                 cur_class.updateNumOpponentCards(data.player);
             }
