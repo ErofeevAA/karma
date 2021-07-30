@@ -13,30 +13,43 @@
 }
 
 .not-belong-players-block {
-    margin: 9px 0;
-    padding: 1px 2px;
+    border-radius: 7px;
+    margin: 10px 0;
     color: cornsilk;
     width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(29,51,74, 0.6);
+    background-color: rgba(166,189,215, 0.3);
 }
 
 .discard-pile-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-width: 90px;
+    padding-left: 2px;
+    min-height: 138px;
+    background-color: rgba(29,51,74,0.4);
 }
 
 .cards-in-fight-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     min-width: 90px;
+    padding-left: 2px;
+    min-height: 138px;
+    background-color: #00000000;
 }
 
 .deck-block {
+    padding-top: 2px;
+    padding-left: 2px;
     min-width: 90px;
     min-height: 100px;
-    background-color: rgba(29,51,74, 0.6);
-    border: #0B0C10 solid;
+    background-color: rgba(29,51,74, 0.4);
     border-radius: 7px;
     display: flex;
     flex-direction: column;
