@@ -144,7 +144,7 @@ class Field {
                 }
                 continue;
             }
-            while (this.players[i].cards_in_hand.length < 6 || this.deck.length > 0) {
+            while (this.players[i].cards_in_hand.length < 6 && this.deck.length > 0) {
                 this.players[i].cards_in_hand.push(this.deck.pop());
             }
         }
@@ -187,7 +187,7 @@ class Field {
         this.cards_in_fight = [];
         this.players[this.num_attacker].cards_in_hand.splice(index, 1);
         for (let i = 0; i < this.players.length; ++i) {
-            while (this.players[i].cards_in_hand.length < 6 || this.deck.length > 0) {
+            while (this.players[i].cards_in_hand.length < 6 && this.deck.length > 0) {
                 this.players[i].cards_in_hand.push(this.deck.pop());
             }
         }
