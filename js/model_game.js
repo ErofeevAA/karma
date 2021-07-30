@@ -355,7 +355,7 @@ class ModelGame {
 
     eventClickCardInHand(img, card, block) {
         console.log("click on hand" + img.alt + ' ' + card.name);
-        if (this.field.karma_in_game === undefined) {
+        if (this.field.karma_in_game === undefined || this.field.karma_in_game.name === CardsEnum.GIVE_STACK) {
             let res = this.chosenCardFromHand(img.alt);
             if (res) {
                 block.removeChild(img);
