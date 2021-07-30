@@ -45,7 +45,7 @@ class Field {
 
     constructor() {
         this.players = [];
-        this.discard_pile = [];
+        this.discard_pile = false;
         this.deck = [];
         this.cards_in_fight = [];
         this.karma_in_game = [];
@@ -193,6 +193,7 @@ class Field {
             }
         }
         this.changeFirstAttacker();
+        this.discard_pile = true;
     }
 
     changeFirstAttacker() {

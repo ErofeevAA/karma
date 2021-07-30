@@ -37,12 +37,6 @@ class ModelGame {
         let block = document.createElement('div');
         block.className = "discard-pile-block";
         block.id = "discard-pile-block";
-        if (this.field.discard_pile.length > 0) {
-            let img = document.createElement('img');
-            img.className = "img-card";
-            img.alt = "";
-            block.appendChild(img);
-        }
         return block;
     }
 
@@ -275,6 +269,16 @@ class ModelGame {
         }
     }
 
+    updateDiscardPile() {
+        let block = document.getElementById("discard-pile-block");
+        if (this.field.discard_pile) {
+            let img = document.createElement('img');
+            img.className = "img-card";
+            img.alt = "";
+            block.appendChild(img);
+        }
+    }
+
     chosenCardFromTable(index) {
 
     }
@@ -324,6 +328,7 @@ class ModelGame {
         if (res) {
             block.removeChild(img);
             this.updateInHand();
+            this.updateDiscardPile();
             this.sendMove(card.name);
         }
     }
@@ -346,6 +351,7 @@ class ModelGame {
                 cur_class.updateBordersColor();
                 cur_class.updateDeck();
                 cur_class.updateNumOpponentCards(data.player);
+                cur_class.updateDiscardPile();
             }
         });
     }
