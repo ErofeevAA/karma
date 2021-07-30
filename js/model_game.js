@@ -257,6 +257,7 @@ class ModelGame {
         if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
             //console.log("less_or_no"+card.name);
             this.field.cardNoLessInFight(card, index);
+            this.updateInHand();
             this.updateDeck();
             this.updateCardsInFightBlock();
             return true;
