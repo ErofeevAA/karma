@@ -18,6 +18,7 @@ class ModelGame {
         this.main_block.appendChild(this.createNotBelongPlayersBlock());
         let player = this.field.players[this.num_player];
         this.main_block.appendChild(this.createPlayerBlock(player));
+        this.waitMove();
     }
 
     createNotBelongPlayersBlock() {
@@ -35,6 +36,7 @@ class ModelGame {
     createDiscardPile() {
         let block = document.createElement('div');
         block.className = "discard-pile-block";
+        block.id = "discard-pile-block";
         if (this.field.discard_pile.length > 0) {
             let img = document.createElement('img');
             img.className = "img-card";
@@ -46,7 +48,8 @@ class ModelGame {
 
     createCardsInFight() {
         let block = document.createElement('div');
-        block.className = "cards-in-fight";
+        block.className = "cards-in-fight-block";
+        block.id = "cards-in-fight-block";
         let top_i = this.field.cards_in_fight.length - 1;
         if (top_i > -1) {
             let img = document.createElement('img');
@@ -61,12 +64,14 @@ class ModelGame {
     createDeck() {
         let block = document.createElement('div');
         block.className = "deck-block";
+        block.id = "deck-block";
         let img = document.createElement('img');
         img.src = ModelGameEnum.CARD_SHIRT_PATH;
         img.className = "img-card";
         img.alt = "";
         let p = document.createElement('p');
         p.className = "num-deck";
+        p.id = "num-deck";
         p.innerText = String(this.field.deck.length);
         block.appendChild(img);
         block.appendChild(p);
@@ -76,7 +81,7 @@ class ModelGame {
     createOpponentBlock(player, index) {
         let block = document.createElement('div');
         block.className = "player-block";
-        block.id = this.genBlockId(player.name, index);
+        //block.id = this.genBlockId(player.name, index);
         let player_name_block = this.createPlayerNameBlock(player.name);
         let in_hand_block = this.createOpponentInHandBlock(player.cards_in_hand.length);
         let on_table_block = this.createCardsOpponentOnTable(player.cards_on_table);
@@ -89,7 +94,7 @@ class ModelGame {
     createPlayerBlock(player) {
         let block = document.createElement('div');
         block.className = "player-block";
-        block.id = this.genBlockId(player.name, this.num_player);
+        //block.id = this.genBlockId(player.name, this.num_player);
         let on_table_block = this.createCardsOnTable(player.cards_on_table);
         let in_hand_block = this.createCardsInHandBlock(player.cards_in_hand);
         let player_name_block = this.createPlayerNameBlock(player.name);
@@ -109,6 +114,7 @@ class ModelGame {
         block.appendChild(img);*/
         let p = document.createElement('p');
         p.className = "num-cards-hand-opponent";
+        p.id = "num-cards-hand-opponent";
         p.innerText = "Число карт: " + cards_length;
         block.appendChild(p);
         return block;
@@ -117,6 +123,7 @@ class ModelGame {
     createCardsOpponentOnTable(cards) {
         let block = document.createElement("div")
         block.className = "cards-on-table-block";
+        block.id = "cards-on-table-opponent-block";
         for (let i = 0; i < cards.length; ++i) {
             let last = cards[i].length - 1;
             let img = document.createElement('img');
@@ -132,6 +139,7 @@ class ModelGame {
         let cur_class = this;
         let block = document.createElement("div")
         block.className = "cards-on-table-block";
+        block.id = "cards-on-table-block";
         for (let i = 0; i < cards.length; ++i) {
             let last = cards[i].length - 1;
             let img = document.createElement('img');
@@ -148,22 +156,11 @@ class ModelGame {
     }
 
     createCardsInHandBlock(cards) {
-        let cur_class = this;
         let block = document.createElement("div")
         block.className = "cards-in-hand-block";
+        block.id = "cards-in-hand-block";
         for (let i = 0; i < cards.length; ++i) {
-            let img = document.createElement('img');
-            img.className = "img-card";
-            img.src = cards[i].image_path;
-            img.alt = String(i);
-            img.addEventListener("click", function () {
-                console.log(img.alt + ' ' + cards[i].name);
-                let res = cur_class.chosenCardFromHand(img.alt);
-                if (res) {
-                    block.removeChild(img);
-                }
-            });
-            block.appendChild(img);
+            this.appendImgCardToHand(block, cards[i], i);
         }
         return block;
     }
@@ -178,8 +175,43 @@ class ModelGame {
         return block;
     }
 
-    genBlockId(player_name, player_index) {
+    appendImgCardToHand(block, card, index) {
+        let img = document.createElement('img');
+        img.className = "img-card";
+        img.src = card.image_path;
+        img.alt = String(index);
+        let cur_class = this;
+        img.addEventListener("click", function () {
+            console.log(img.alt + ' ' + card.name);
+            let res = cur_class.chosenCardFromHand(img.alt);
+            if (res) {
+                block.removeChild(img);
+                cur_class.sendMove(card.name);
+            }
+        });
+        block.appendChild(img);
+    }
+
+    /*genBlockId(player_name, player_index) {
         return "id" + player_name + player_index;
+    }*/
+
+    updateDeck() {
+        let num = document.getElementById("num-deck");
+        num.innerText = String(this.field.deck.length);
+        if (this.field.deck.length === 0) {
+            let block = document.getElementById("deck-block");
+            let img = block.getElementsByClassName("img-card")[0];
+            block.removeChild(img);
+        }
+    }
+
+    updateInHand() {
+        let block = document.getElementById("cards-in-hand-block");
+        let cards = this.field.players[this.num_player].cards_in_hand;
+        for (let i = block.childNodes.length - 1 ; i < cards.length; ++i) {
+            this.appendImgCardToHand(block, cards[i], i);
+        }
     }
 
     chosenCardFromTable(index) {
@@ -196,12 +228,39 @@ class ModelGame {
         }
         let last = this.field.cards_in_fight.length - 1;
         if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
+            this.field.cardNoLessInFight(card, index);
             return true;
         }
         if (this.field.cards_in_fight[last].name === card.name) {
             this.field.cardsEqualsInFight(index, this.num_player);
+            this.updateDeck();
+            this.updateInHand();
             return true;
         }
+    }
+
+    waitMove() {
+        let cur_class = this;
+        let val_changed = this.ref.child('move').on('value', function (snapshot) {
+            let data = snapshot.val();
+            if (data !== undefined) {
+                if (data.player === cur_class.num_player) {
+                    return;
+                }
+                cur_class.field.move(data.step);
+            }
+        });
+    }
+
+    sendMove(m) {
+        //let cur_class = this;
+        let move = {
+            player: this.num_player,
+            step: m
+        };
+        let val_changed = this.ref.set({
+            move
+        });
     }
 }
 
@@ -233,18 +292,6 @@ class ModelGameHost extends ModelGame {
         this.ref.update({
             deck
         });
-    }
-
-    waitMove() {
-        let cur_class = this;
-        let val_changed = this.ref.child('move').on('value', function (snapshot) {
-
-        });
-    }
-
-    setMove() {
-        let cur_class = this;
-        let val_changed = this.ref.child('move').set();
     }
 
     init(names) {
@@ -335,5 +382,6 @@ class ModelGameClient extends ModelGame {
 }
 
 const ModelGameEnum = {
-    CARD_SHIRT_PATH: "assets/playing_cards/card_shirt.png"
+    CARD_SHIRT_PATH: "assets/playing_cards/card_shirt.png",
+    ABANDON: "abandon"
 };

@@ -128,11 +128,33 @@ class Field {
         }
     }
 
+    getIndexCard(cards, name) {
+        for (let i = 0; i < cards.length; ++i) {
+            if (cards.name === name) {
+                return i;
+            }
+        }
+    }
+
+    move(move) {
+        if (typeof move === 'number') {
+            let last = this.cards_in_fight.length - 1;
+            let cards = this.players[this.num_attacker].cards_in_hand;
+            if (move === this.cards_in_fight[last]) {
+                this.cardsEqualsInFight(this.getIndexCard(cards, move));
+                return;
+            }
+            if (move > this.cards_in_fight[last]) {
+                this.cardNoLessInFight(cards, this.getIndexCard(cards, move));
+            }
+        }
+    }
+
     karmaCardsInFight(card, index) {
         //this.changeAttacker();
     }
 
-    cardLessInFight(card, index) {
+    cardNoLessInFight(card, index) {
         this.cards_in_fight.push(card);
         this.players[this.num_attacker].cards_in_hand.splice(index, 1);
         this.changeAttacker();
