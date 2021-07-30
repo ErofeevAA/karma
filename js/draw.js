@@ -25,9 +25,7 @@ class Draw {
     drawBackground() {}
     drawAbout() {}
     drawTrain() {}
-    drawParameters() {}
     drawMultiplayer() {}
-    drawGame() {}
 }
 
 class DrawMenu extends Draw {
@@ -75,21 +73,6 @@ class DrawTrain extends Draw {
         this.context.drawImage(card_shirt, 1180, 50, 100, 100);
         this.context.drawImage(from_bottom_to_top, 1180, 250, 100, 100);
         this.context.drawImage(five_or_less, 1180, 450, 100, 100);
-    }
-}
-
-class DrawParameters extends Draw {
-    constructor(canvas_about) {
-        super(canvas_about);
-    }
-
-    drawParameters() {
-        super.drawAbout();
-        this.context.globalAlpha = 0.2;
-        this.context.drawImage(sea, 0, 0, 1340, 600);
-        this.context.globalAlpha = 0.6;
-        this.context.fillStyle = '#0B0C10';
-        this.context.fillRect(300, 200, 650, 300);
     }
 }
 
