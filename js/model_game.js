@@ -249,6 +249,7 @@ class ModelGame {
         }
         let last = this.field.cards_in_fight.length - 1;
         if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
+            //console.log("less_or_no"+card.name);
             this.field.cardNoLessInFight(card, index);
             this.updateDeck();
             this.updateCardsInFightBlock();
@@ -389,7 +390,7 @@ class ModelGameClient extends ModelGame {
         let cur_class = this;
         let val_changed = this.ref.child('deck').on('value', function (snapshot) {
             let data = snapshot.val();
-            console.log(data);
+            //console.log(data);
             if (data !== null && data !== undefined) {
                 cur_class.field.setDeck(data);
                 cur_class.ref.child('deck').off('value', val_changed);
@@ -405,7 +406,7 @@ class ModelGameClient extends ModelGame {
             let data = snapshot.val();
             let l_index = cur_class.field.players.length - 1;
             if (data.user_cards !== undefined && data.user_cards[l_index] !== undefined) {
-                console.log("getUserCards");
+                //console.log("getUserCards");
                 cur_class.ref.off('value', val_changed);
                 cur_class.field.setPlayersCards(data.user_cards);
                 cur_class.getDeck();

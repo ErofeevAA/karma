@@ -141,14 +141,16 @@ class Field {
             //console.log("move", move);
             let last = this.cards_in_fight.length - 1;
             let cards = this.players[this.num_attacker].cards_in_hand;
+            //console.log("num_attacker " + this.num_attacker);
             //console.log(cards);
             let index = this.getIndexCard(cards, move);
             //console.log(index);
-            if (last === -1 || move > this.cards_in_fight[last]) {
+            if (last === -1 || move > this.cards_in_fight[last].name) {
+                //console.log('if no less');
                 this.cardNoLessInFight(cards[index], index);
                 return;
             }
-            if (move === this.cards_in_fight[last]) {
+            if (move === this.cards_in_fight[last].name) {
                 this.cardsEqualsInFight(index);
             }
         }
