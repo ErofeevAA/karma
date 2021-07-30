@@ -175,7 +175,7 @@ class ModelGame {
         if (index === this.num_player) {
             let cur_class = this;
             block.addEventListener('click', function () {
-                if (cur_class.field.players[cur_class.num_player].state === PlayerState.DEFENDER &&
+                if (cur_class.field.players[cur_class.num_player].state === PlayerState.ATTACKER &&
                 cur_class.field.cards_in_fight.length !== 0) {
                     console.log("Взяяяяять");
                     cur_class.sendMove(ModelGameEnum.ABANDON);
@@ -296,6 +296,11 @@ class ModelGame {
             this.updateDeck();
             this.updateBordersColor();
             this.updateCardsInFightBlock();
+            for (let i = 0; i < this.field.players.length; ++i) {
+                if (i !== this.num_player) {
+                    this.updateNumOpponentCards(i);
+                }
+            }
             //this.updateInHand();
             return true;
         }
