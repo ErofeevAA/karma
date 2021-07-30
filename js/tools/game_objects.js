@@ -49,7 +49,7 @@ class Field {
         this.deck = [];
         this.cards_in_fight = [];
         this.karma_in_game = [];
-        this.num_attaker = -1;
+        this.num_attacker = -1;
         this.num_first_attacker = -1;
     }
 

@@ -243,7 +243,7 @@ class ModelGame {
         let cur_class = this;
         let val_changed = this.ref.child('move').on('value', function (snapshot) {
             let data = snapshot.val();
-            if (data !== undefined) {
+            if (data !== null && data !== undefined && data.player !== undefined) {
                 if (data.player === cur_class.num_player) {
                     return;
                 }
@@ -298,6 +298,7 @@ class ModelGameHost extends ModelGame {
         this.field.init(names);
         this.initBlocks();
         this.sendUserCards();
+        this.sendNumFirstAttacker();
         this.sendDeck();
     }
 
@@ -320,6 +321,11 @@ class ModelGameHost extends ModelGame {
                 cards_on_table
             });
         }
+    }
+    sendNumFirstAttacker() {
+        this.ref.update({
+            num_first_attacker: this.field.num_first_attacker
+        });
     }
 }
 
@@ -348,6 +354,7 @@ class ModelGameClient extends ModelGame {
                     }
                 }
                 cur_class.getUserCards();
+                cur_class.getNumFirstAttacker();
             }
         });
     }
@@ -376,6 +383,17 @@ class ModelGameClient extends ModelGame {
                 cur_class.ref.off('value', val_changed);
                 cur_class.field.setPlayersCards(data.user_cards);
                 cur_class.getDeck();
+            }
+        });
+    }
+
+    getNumFirstAttacker() {
+        let val_changed = this.ref.child('num_first_attacker').on('value', function (snapshot) {
+            let data = snapshot.val();
+            if (data !== null && data !== undefined) {
+                this.ref.child('num_first_attacker').off('value', val_changed);
+                this.field.num_attacker = Number(data);
+                this.field.num_first_attacker = Number(data);
             }
         });
     }
