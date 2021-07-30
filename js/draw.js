@@ -14,6 +14,8 @@ let card_8 = new Image();
 card_8.src = 'assets/playing_cards/number_cards/8.png';
 let card_shirt = new Image();
 card_shirt.src = 'assets/playing_cards/card_shirt.png';
+let map = new Image();
+map.src = 'assets/for_players.jpg';
 
 class Draw {
     constructor(canvas_menu) {
@@ -24,6 +26,8 @@ class Draw {
     drawAbout() {}
     drawTrain() {}
     drawParameters() {}
+    drawMultiplayer() {}
+    drawGame() {}
 }
 
 class DrawMenu extends Draw {
@@ -86,5 +90,17 @@ class DrawParameters extends Draw {
         this.context.globalAlpha = 0.6;
         this.context.fillStyle = '#0B0C10';
         this.context.fillRect(300, 200, 650, 300);
+    }
+}
+
+class DrawMultiplayer extends Draw {
+    constructor(canvas_multiplayer) {
+        super(canvas_multiplayer);
+    }
+
+    drawMultiplayer() {
+        super.drawMultiplayer();
+        this.context.globalAlpha = 0.2;
+        this.context.drawImage(sea, 0, 0, 1340, 600);
     }
 }

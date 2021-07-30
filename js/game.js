@@ -57,8 +57,8 @@ function menu() {
 }
 
 function multiplayer() {
-    let draw_train = new DrawTrain(g_canvas);
-    draw_train.drawTrain();
+    let draw_multiplayer = new DrawMultiplayer(g_canvas);
+    draw_multiplayer.drawMultiplayer();
     console.log("multiplayer");
     g_game_div.removeChild(g_block);
     g_block = document.createElement('div');

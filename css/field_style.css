@@ -13,13 +13,15 @@
 }
 
 .not-belong-players-block {
-    margin: 10px 0;
+    margin: 9px 0;
+    padding: 1px 2px;
     color: cornsilk;
     width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    background-color: rgba(29,51,74, 0.6);
 }
 
 .discard-pile-block {
@@ -33,7 +35,7 @@
 .deck-block {
     min-width: 90px;
     min-height: 100px;
-    background-color: rgba(148, 72, 6, 0.4);
+    background-color: rgba(29,51,74, 0.6);
     border: #0B0C10 solid;
     border-radius: 7px;
     display: flex;
@@ -44,7 +46,7 @@
 
 .cards-on-table-block {
     margin: 2px 0;
-    background-color: rgba(148, 72, 6, 0.4);
+    background-color: rgba(29,51,74, 0.7);
     width: 40%;
     border: #0B0C10 solid;
     border-radius: 7px;
@@ -87,7 +89,7 @@
     padding: 0 5px;
     min-width: 10px;
     margin: 1px 0;
-    background-color: rgba(97, 47, 4, 0.5);
+    background-color: rgba(29,51,74, 0.6);
     border: #0B0C10 solid;
     border-radius: 7px;
     text-align: center;
