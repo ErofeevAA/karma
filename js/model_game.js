@@ -214,6 +214,11 @@ class ModelGame {
         }
     }
 
+    updateNumOpponentCards(num) {
+        let p = document.getElementById("num-cards-hand-opponent");
+        p.innerText = "Число карт:" + this.field.players[num].cards_in_hand.length;
+    }
+
     chosenCardFromTable(index) {
 
     }
@@ -229,6 +234,7 @@ class ModelGame {
         let last = this.field.cards_in_fight.length - 1;
         if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
             this.field.cardNoLessInFight(card, index);
+            this.updateDeck();
             return true;
         }
         if (this.field.cards_in_fight[last].name === card.name) {
@@ -237,6 +243,7 @@ class ModelGame {
             this.updateInHand();
             return true;
         }
+        return false;
     }
 
     waitMove() {
@@ -248,6 +255,8 @@ class ModelGame {
                     return;
                 }
                 cur_class.field.move(data.step);
+                cur_class.updateInHand();
+                cur_class.updateNumOpponentCards(data.player);
             }
         });
     }
@@ -258,7 +267,7 @@ class ModelGame {
             player: this.num_player,
             step: m
         };
-        let val_changed = this.ref.set({
+        let val_changed = this.ref.update({
             move
         });
     }
