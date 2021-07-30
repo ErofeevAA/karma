@@ -180,6 +180,9 @@ class ModelGame {
                     console.log("Взяяяяять");
                     cur_class.sendMove(ModelGameEnum.ABANDON);
                     cur_class.field.abandonCards(cur_class.num_player);
+                    if (cur_class.num_player === cur_class.field.num_first_attacker) {
+                        cur_class.field.changeFirstAttacker();
+                    }
                     cur_class.updateCardsInFightBlock();
                     cur_class.updateInHand();
                     cur_class.updateDeck();
@@ -236,7 +239,9 @@ class ModelGame {
         if (this.field.deck.length === 0) {
             let block = document.getElementById("deck-block");
             let img = block.getElementsByClassName("img-card")[0];
-            block.removeChild(img);
+            if (img instanceof Node) {
+                block.removeChild(img);
+            }
         }
     }
 

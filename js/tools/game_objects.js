@@ -148,10 +148,8 @@ class Field {
                 this.players[i].cards_in_hand.push(this.deck.pop());
             }
         }
-        if (num_player === this.num_first_attacker) {
-            this.changeFirstAttacker();
-        }
     }
+
 
     move(move) {
         if (typeof move === 'number') {
