@@ -153,6 +153,7 @@ class Field {
 
 
     move(move) {
+        console.log("move", move);
         if (typeof move === "string") {
             if (this.karma_in_game === CardsEnum.GIVE_STACK) {
                 this.changeAttacker();
@@ -160,7 +161,6 @@ class Field {
             return;
         }
         if (typeof move === 'number') {
-            //console.log("move", move);
             let last = this.cards_in_fight.length - 1;
             let cards = this.players[this.num_attacker].cards_in_hand;
             //console.log("num_attacker " + this.num_attacker);
@@ -182,6 +182,7 @@ class Field {
     karmaCardsInFight(card, index) {
         if (card.name === CardsEnum.GIVE_STACK) {
             this.karma_in_game = new KarmaCard(CardsEnum.GIVE_STACK);
+            this.players[this.num_attacker].cards_in_hand.splice(index, 1);
             this.changeAttacker();
         }
         //this.changeAttacker();

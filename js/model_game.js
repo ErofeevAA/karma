@@ -228,7 +228,7 @@ class ModelGame {
     }
 
     updateKarmaCardsInFightBlock() {
-        let block = document.getElementById("cards-in-fight-block");
+        let block = document.getElementById("karma-cards-in-fight-block");
         if (block.childNodes.length > 0) {
             let img = block.getElementsByClassName("img-card")[0];
             block.removeChild(img);
