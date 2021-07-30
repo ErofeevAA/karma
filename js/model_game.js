@@ -272,7 +272,7 @@ class ModelGame {
         console.log("click on hand" + img.alt + ' ' + card.name);
         let res = this.chosenCardFromHand(img.alt);
         if (res) {
-            //block.removeChild(img);
+            block.removeChild(img);
             this.updateInHand();
             this.sendMove(card.name);
         }
