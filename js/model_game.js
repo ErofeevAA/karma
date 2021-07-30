@@ -393,8 +393,8 @@ class ModelGameClient extends ModelGame {
             let data = snapshot.val();
             if (data !== null && data !== undefined) {
                 curr_class.ref.child('num_first_attacker').off('value', val_changed);
-                this.field.num_attacker = Number(data);
-                this.field.num_first_attacker = Number(data);
+                curr_class.field.num_attacker = Number(data);
+                curr_class.field.num_first_attacker = Number(data);
             }
         });
     }
