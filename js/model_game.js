@@ -182,7 +182,7 @@ class ModelGame {
         img.alt = String(index);
         let cur_class = this;
         img.addEventListener("click", function () {
-            console.log(img.alt + ' ' + card.name);
+            console.log("click on hand" + img.alt + ' ' + card.name);
             let res = cur_class.chosenCardFromHand(img.alt);
             if (res) {
                 block.removeChild(img);
@@ -267,7 +267,7 @@ class ModelGame {
         let cur_class = this;
         let val_changed = this.ref.child('move').on('value', function (snapshot) {
             let data = snapshot.val();
-            if (data !== null && data !== undefined && data.player !== undefined) {
+            if (data !== null && data !== undefined && data.step !== undefined) {
                 if (data.player === cur_class.num_player) {
                     return;
                 }

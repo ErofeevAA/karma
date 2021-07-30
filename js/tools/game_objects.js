@@ -108,7 +108,7 @@ class Field {
         //console.log("setDeck");
         //console.log(deck_name);
         for (let i = 0; i < deck_name.length; ++i) {
-            console.log(deck_name[i]);
+            //console.log(deck_name[i]);
             this.deck.push(this.typeCard(deck_name[i]));
         }
     }
@@ -156,6 +156,8 @@ class Field {
     }
 
     cardNoLessInFight(card, index) {
+        console.log("card");
+        console.log(card);
         this.cards_in_fight.push(card);
         this.players[this.num_attacker].cards_in_hand.splice(index, 1);
         this.changeAttacker();
