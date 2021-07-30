@@ -227,7 +227,7 @@ class ModelGameHost extends ModelGame {
 
     sendDeck() {
         let deck = this.field.deck;
-        this.ref.set({
+        this.ref.update({
             deck
         });
     }
