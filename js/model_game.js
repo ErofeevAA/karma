@@ -231,7 +231,7 @@ class ModelGame {
             }
         }
         let cards = this.field.players[this.num_player].cards_in_hand;
-        for (let i = block.childNodes.length - 1 ; i < cards.length; ++i) {
+        for (let i = nodes.length; i < cards.length; ++i) {
             this.appendImgCardToHand(block, cards[i], i);
         }
     }
