@@ -172,6 +172,17 @@ class ModelGame {
         if (index === this.field.num_attacker) {
             block.style.borderColor = ModelGameEnum.COLOR_ATTACK;
         }
+        if (index === this.num_player) {
+            let cur_class = this;
+            block.addEventListener('onclick', function () {
+                if (cur_class.field.players[cur_class.num_player].state === PlayerState.DEFENDER &&
+                cur_class.field.cards_in_fight.length !== 0) {
+                    console.log("Взяяяяять");
+                    cur_class.sendMove(ModelGameEnum.ABANDON);
+                    cur_class.field.abandonCards(cur_class.num_player);
+                }
+            });
+        }
         let p = document.createElement('p');
         p.className = "player-name-text";
         p.innerText = name;
@@ -309,7 +320,11 @@ class ModelGame {
                 if (data.player === cur_class.num_player) {
                     return;
                 }
-                cur_class.field.move(data.step);
+                if (data.step === ModelGameEnum.ABANDON) {
+                    cur_class.field.abandonCards(data.player);
+                } else {
+                    cur_class.field.move(data.step);
+                }
                 cur_class.updateCardsInFightBlock();
                 cur_class.updateInHand();
                 cur_class.updateBordersColor();
