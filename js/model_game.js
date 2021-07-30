@@ -196,6 +196,22 @@ class ModelGame {
         return "id" + player_name + player_index;
     }*/
 
+    updateCardsInFightBlock() {
+        let block = document.getElementById("cards-in-fight-block");
+        if (block.childNodes.length > 0) {
+            let img = block.getElementsByClassName("img-card")[0];
+            block.removeChild(img);
+        }
+        let i = this.field.cards_in_fight.length - 1;
+        if (i > -1) {
+            let img = document.createElement('img');
+            img.src = this.field.cards_in_fight[i].image_path;
+            img.className = "img-card";
+            img.alt = "";
+            block.appendChild(img);
+        }
+    }
+
     updateDeck() {
         let num = document.getElementById("num-deck");
         num.innerText = String(this.field.deck.length);
@@ -235,6 +251,7 @@ class ModelGame {
         if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
             this.field.cardNoLessInFight(card, index);
             this.updateDeck();
+            this.updateCardsInFightBlock();
             return true;
         }
         if (this.field.cards_in_fight[last].name === card.name) {
@@ -255,7 +272,7 @@ class ModelGame {
                     return;
                 }
                 cur_class.field.move(data.step);
-                cur_class.createDeck();
+                cur_class.updateCardsInFightBlock();
                 cur_class.updateNumOpponentCards(data.player);
             }
         });
