@@ -105,8 +105,8 @@ class Field {
     }
 
     setDeck(deck_name) {
-        console.log("setDeck");
-        console.log(deck_name);
+        //console.log("setDeck");
+        //console.log(deck_name);
         for (let i = 0; i < deck_name.length; ++i) {
             console.log(deck_name[i]);
             this.deck.push(this.typeCard(deck_name[i]));

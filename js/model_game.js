@@ -301,7 +301,6 @@ class ModelGameClient extends ModelGame {
                     }
                 }
                 cur_class.getUserCards();
-                cur_class.getDeck();
             }
         });
     }
@@ -326,9 +325,10 @@ class ModelGameClient extends ModelGame {
             let data = snapshot.val();
             let l_index = cur_class.field.players.length - 1;
             if (data.user_cards !== undefined && data.user_cards[l_index] !== undefined) {
-                console.log("getDeck if");
+                console.log("getUserCards");
                 cur_class.ref.off('value', val_changed);
                 cur_class.field.setPlayersCards(data.user_cards);
+                cur_class.getDeck();
             }
         });
     }
