@@ -313,7 +313,8 @@ class ModelGame {
             return false;
         }
         let card = this.field.players[this.num_player].cards_in_hand[index];
-        if (this.field.karma_in_game.name === CardsEnum.GIVE_STACK && card.name !== CardsEnum.GIVE_STACK) {
+        if (this.field.karma_in_game !== undefined && this.field.karma_in_game.name === CardsEnum.GIVE_STACK
+            && card.name !== CardsEnum.GIVE_STACK) {
             return false;
         }
         if (card instanceof KarmaCard) {
