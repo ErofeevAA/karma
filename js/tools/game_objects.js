@@ -12,7 +12,7 @@ class Card {
 class NumCard extends Card {
 
     constructor(num) {
-        super(num);
+        super(Number(num));
     }
 
     genPath() {
@@ -48,6 +48,9 @@ class Field {
         this.discard_pile = [];
         this.deck = [];
         this.cards_in_fight = [];
+        this.karma_in_game = [];
+        this.num_attaker = -1;
+        this.num_first_attacker = -1;
     }
 
     init(names) {
@@ -66,18 +69,21 @@ class Field {
         this.setPlayers(names);
 
         for (let i = 0; i < this.players.length; ++i) {
-            for (let j = 0; j < 3; ++j) {
+            for (let j = 0; j < 6; ++j) {
                 this.players[i].cards_in_hand.push(this.deck.pop());
+            }
+            for (let j = 0; j < 3; ++j) {
                 this.players[i].cards_on_table.push([this.deck.pop(), this.deck.pop()]);
             }
         }
-        let num_attacker = Math.floor(Math.random() * this.players.length);
-        this.players[num_attacker].state = PlayerState.ATTACKER;
-        if (num_attacker + 1 === this.players.length) {
+        this.num_attacker = Math.floor(Math.random() * this.players.length);
+        this.players[this.num_attacker].state = PlayerState.ATTACKER;
+        if (this.num_attacker + 1 === this.players.length) {
             this.players[0].state = PlayerState.DEFENDER;
         } else {
-            this.players[num_attacker + 1].state = PlayerState.DEFENDER;
+            this.players[this.num_attacker + 1].state = PlayerState.DEFENDER;
         }
+        this.num_first_attacker = this.num_attacker;
     }
 
     setPlayers(names) {
@@ -110,6 +116,52 @@ class Field {
                 this.deck[i] = this.deck[j];
                 this.deck[j] = tmp;
             }
+        }
+    }
+
+    karmaCardsInFight(card, index) {
+        //this.changeAttacker();
+    }
+
+    cardLessInFight(card, index) {
+        this.cards_in_fight.push(card);
+        this.players[this.num_attacker].cards_in_hand.splice(index, 1);
+        this.changeAttacker();
+    }
+
+    cardsEqualsInFight(index) {
+        this.cards_in_fight = [];
+        this.players[this.num_attacker].cards_in_hand.splice(index, 1);
+        for (let i = 0; i < this.players.length; ++i) {
+            while (this.players[i].cards_in_hand.length < 6) {
+                this.players[i].cards_in_hand.push(this.deck.pop());
+            }
+        }
+        this.changeFirstAttacker();
+    }
+
+    changeFirstAttacker() {
+        this.num_first_attacker += 1;
+        if (this.num_first_attacker === this.players.length) {
+            this.players[0].state = PlayerState.ATTACKER;
+            this.players[this.num_first_attacker - 1].state = PlayerState.DEFENDER;
+            this.num_first_attacker = 0;
+        } else {
+            this.players[this.num_first_attacker].state = PlayerState.ATTACKER;
+            this.players[this.num_first_attacker - 1].state = PlayerState.DEFENDER;
+        }
+        this.num_attacker = this.num_first_attacker;
+    }
+
+    changeAttacker() {
+        this.num_attacker += 1;
+        if (this.num_attacker === this.players.length) {
+            this.players[0].state = PlayerState.ATTACKER;
+            this.players[this.num_attacker - 1].state = PlayerState.DEFENDER;
+            this.num_attacker = 0;
+        } else {
+            this.players[this.num_attacker].state = PlayerState.ATTACKER;
+            this.players[this.num_attacker - 1].state = PlayerState.DEFENDER;
         }
     }
 }

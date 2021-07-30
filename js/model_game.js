@@ -129,6 +129,7 @@ class ModelGame {
     }
 
     createCardsOnTable(cards) {
+        let cur_class = this;
         let block = document.createElement("div")
         block.className = "cards-on-table-block";
         for (let i = 0; i < cards.length; ++i) {
@@ -139,6 +140,7 @@ class ModelGame {
             img.alt = String(i);
             img.addEventListener('click', function () {
                 console.log(img.alt + ' ' + cards[i][last].name);
+                cur_class.chosenCardFromTable(img.alt);
             })
             block.appendChild(img);
         }
@@ -146,6 +148,7 @@ class ModelGame {
     }
 
     createCardsInHandBlock(cards) {
+        let cur_class = this;
         let block = document.createElement("div")
         block.className = "cards-in-hand-block";
         for (let i = 0; i < cards.length; ++i) {
@@ -155,6 +158,10 @@ class ModelGame {
             img.alt = String(i);
             img.addEventListener("click", function () {
                 console.log(img.alt + ' ' + cards[i].name);
+                let res = cur_class.chosenCardFromHand(img.alt);
+                if (res) {
+                    block.removeChild(img);
+                }
             });
             block.appendChild(img);
         }
@@ -173,6 +180,28 @@ class ModelGame {
 
     genBlockId(player_name, player_index) {
         return "id" + player_name + player_index;
+    }
+
+    chosenCardFromTable(index) {
+
+    }
+
+    chosenCardFromHand(index) {
+        if (this.field.players[this.num_player].state === PlayerState.DEFENDER) {
+            return false;
+        }
+        let card = this.field.players[this.num_player].cards_in_hand[index];
+        if (card instanceof KarmaCard) {
+            return false;
+        }
+        let last = this.field.cards_in_fight.length - 1;
+        if (this.field.cards_in_fight.length === 0 || this.field.cards_in_fight[last].name < card.name) {
+            return true;
+        }
+        if (this.field.cards_in_fight[last].name === card.name) {
+            this.field.cardsEqualsInFight(index, this.num_player);
+            return true;
+        }
     }
 }
 
@@ -196,13 +225,33 @@ class ModelGameHost extends ModelGame {
         });
     }
 
+    sendDeck() {
+        let deck = this.field.deck;
+        this.ref.set({
+            deck
+        });
+    }
+
+    waitMove() {
+        let cur_class = this;
+        let val_changed = this.ref.child('move').on('value', function (snapshot) {
+
+        });
+    }
+
+    setMove() {
+        let cur_class = this;
+        let val_changed = this.ref.child('move').set();
+    }
+
     init(names) {
         this.field.init(names);
         this.initBlocks();
+        this.sendUserCards();
         this.sendDeck();
     }
 
-    sendDeck() {
+    sendUserCards() {
         //let cur_class = this;
         for (let i = 0; i < this.field.players.length; ++i) {
             let cards_in_hand = [];
@@ -248,12 +297,25 @@ class ModelGameClient extends ModelGame {
                         break;
                     }
                 }
+                cur_class.getUserCards();
                 cur_class.getDeck();
             }
         });
     }
 
     getDeck() {
+        let cur_class = this;
+        let val_changed = this.ref.child('deck').on('value', function (snapshot) {
+            let data = snapshot.val();
+            if (data.deck !== undefined) {
+                cur_class.field.deck = data.deck;
+                this.ref.child('deck').off('value', val_changed);
+                cur_class.initBlocks();
+            }
+        });
+    }
+
+    getUserCards() {
         let cur_class = this;
         let val_changed = this.ref.on('value', function (snapshot) {
             //console.log(snapshot.val());
@@ -263,7 +325,6 @@ class ModelGameClient extends ModelGame {
                 console.log("getDeck if");
                 cur_class.ref.off('value', val_changed);
                 cur_class.field.setPlayersCards(data.user_cards);
-                cur_class.initBlocks();
             }
         });
     }
