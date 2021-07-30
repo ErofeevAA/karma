@@ -26,9 +26,11 @@ class ModelGame {
         block.className = "not-belong-players-block";
         let discard_pile = this.createDiscardPile();
         let card_in_fight = this.createCardsInFight();
+        let karma_in_fight = this.createKarmaCardsInFight();
         let deck = this.createDeck();
         block.appendChild(discard_pile);
         block.appendChild(card_in_fight);
+        block.appendChild(karma_in_fight);
         block.appendChild(deck);
         return block;
     }
@@ -44,14 +46,13 @@ class ModelGame {
         let block = document.createElement('div');
         block.className = "cards-in-fight-block";
         block.id = "cards-in-fight-block";
-        let top_i = this.field.cards_in_fight.length - 1;
-        if (top_i > -1) {
-            let img = document.createElement('img');
-            img.src = this.field.cards_in_fight[top_i].image_path;
-            img.className = "img-card";
-            img.alt = "";
-            block.appendChild(img);
-        }
+        return block;
+    }
+
+    createKarmaCardsInFight() {
+        let block = document.createElement('div');
+        block.className = "karma-cards-in-fight-block";
+        block.id = "karma-cards-in-fight-block";
         return block;
     }
 
@@ -178,6 +179,7 @@ class ModelGame {
                     cur_class.updateInHand();
                     cur_class.updateDeck();
                     cur_class.updateBordersColor();
+                    cur_class.updateKarmaCardsInFightBlock();
                     for (let i = 0; i < cur_class.field.players.length; ++i) {
                         if (cur_class.num_player !== i) {
                             cur_class.updateNumOpponentCards(i);
@@ -220,6 +222,21 @@ class ModelGame {
             let img = document.createElement('img');
             img.src = this.field.cards_in_fight[i].image_path;
             img.className = "img-card";
+            img.alt = "";
+            block.appendChild(img);
+        }
+    }
+
+    updateKarmaCardsInFightBlock() {
+        let block = document.getElementById("cards-in-fight-block");
+        if (block.childNodes.length > 0) {
+            let img = block.getElementsByClassName("img-card")[0];
+            block.removeChild(img);
+        }
+        if (this.field.karma_in_game !== undefined) {
+            let img = document.createElement('img');
+            img.className = "img-card";
+            img.src = this.field.karma_in_game.image_path;
             img.alt = "";
             block.appendChild(img);
         }
@@ -288,7 +305,12 @@ class ModelGame {
             return false;
         }
         let card = this.field.players[this.num_player].cards_in_hand[index];
+        if (this.field.karma_in_game === CardsEnum.GIVE_STACK && card.name !== CardsEnum.GIVE_STACK) {
+            return false;
+        }
         if (card instanceof KarmaCard) {
+            this.field.karmaCardsInFight(card, index);
+            this.updateKarmaCardsInFightBlock();
             return false;
         }
         let last = this.field.cards_in_fight.length - 1;

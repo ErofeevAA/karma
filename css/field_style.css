@@ -44,6 +44,16 @@
     background-color: #00000000;
 }
 
+.karma-cards-in-fight-block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 90px;
+    padding-left: 2px;
+    min-height: 138px;
+    background-color: #00000000;
+}
+
 .deck-block {
     padding-top: 2px;
     padding-left: 2px;

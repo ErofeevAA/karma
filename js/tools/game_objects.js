@@ -48,7 +48,7 @@ class Field {
         this.discard_pile = false;
         this.deck = [];
         this.cards_in_fight = [];
-        this.karma_in_game = [];
+        this.karma_in_game = undefined;
         this.num_attacker = -1;
         this.num_first_attacker = -1;
     }
@@ -137,6 +137,7 @@ class Field {
     }
 
     abandonCards(num_player) {
+        this.karma_in_game = undefined;
         for (let i = 0; i < this.players.length; ++i) {
             if (i === num_player) {
                 while (this.cards_in_fight.length > 0) {
@@ -152,6 +153,12 @@ class Field {
 
 
     move(move) {
+        if (typeof move === "string") {
+            if (this.karma_in_game === CardsEnum.GIVE_STACK) {
+                this.changeAttacker();
+            }
+            return;
+        }
         if (typeof move === 'number') {
             //console.log("move", move);
             let last = this.cards_in_fight.length - 1;
@@ -173,6 +180,10 @@ class Field {
     }
 
     karmaCardsInFight(card, index) {
+        if (card.name === CardsEnum.GIVE_STACK) {
+            this.karma_in_game = new KarmaCard(CardsEnum.GIVE_STACK);
+            this.changeAttacker();
+        }
         //this.changeAttacker();
     }
 
