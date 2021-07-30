@@ -81,7 +81,12 @@
 
 .cards-in-hand-block {
     margin: 2px 0;
-    max-width: 60%;
+    max-width: 50%;
+    overflow-x: auto;
+    padding: 15px;
+    scrollbar-color: #6DC0C8 #C2D2E400;
+    scrollbar-width: thin;
+    white-space: nowrap;
 }
 
 .cards-in-hand-opponent-block {
@@ -123,4 +128,34 @@
 
 .player-name-text {
     font: 12pt Satisfy;
+}
+
+.cards-in-hand-block::-webkit-scrollbar-button {
+    background-repeat: no-repeat;
+    width: 5px;
+    height: 0;
+}
+
+.cards-in-hand-block::-webkit-scrollbar-track {
+    background-color: #ECEDEE00;
+}
+
+.cards-in-hand-block::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: #6DC0C8;
+}
+
+.cards-in-hand-block::-webkit-scrollbar-thumb:hover {
+    background-color: #56999F;
+}
+
+.cards-in-hand-block::-webkit-resizer {
+    background-repeat: no-repeat;
+    width: 4px;
+    height: 0;
+}
+
+.cards-in-hand-block::-webkit-scrollbar {
+    width: 4px;
 }
