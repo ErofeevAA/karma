@@ -226,7 +226,10 @@ class ModelGameHost extends ModelGame {
     }
 
     sendDeck() {
-        let deck = this.field.deck;
+        let deck = [];
+        for (let i = 0; i <  this.field.deck.length; ++i) {
+            deck.push(this.field.deck[i].name);
+        }
         this.ref.update({
             deck
         });
@@ -308,8 +311,8 @@ class ModelGameClient extends ModelGame {
         let val_changed = this.ref.child('deck').on('value', function (snapshot) {
             let data = snapshot.val();
             if (data.deck !== undefined) {
-                cur_class.field.deck = data.deck;
-                this.ref.child('deck').off('value', val_changed);
+                cur_class.field.setDeck(data.deck);
+                cur_class.ref.child('deck').off('value', val_changed);
                 cur_class.initBlocks();
             }
         });

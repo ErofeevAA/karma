@@ -104,6 +104,12 @@ class Field {
         }
     }
 
+    setDeck(deck) {
+        for (let i = 0; deck.length; ++i) {
+            this.deck.push(this.typeCard(deck[i]));
+        }
+    }
+
     typeCard(card) {
         return (typeof card === 'number') ? new NumCard(card) : new KarmaCard(card);
     }
