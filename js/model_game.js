@@ -183,7 +183,11 @@ class ModelGame {
                     cur_class.updateCardsInFightBlock();
                     cur_class.updateInHand();
                     cur_class.updateDeck();
-                    cur_class.updateNumOpponentCards(data.player);
+                    for (let i = 0; i < cur_class.field.players.length; ++i) {
+                        if (cur_class.num_player !== i) {
+                            cur_class.updateNumOpponentCards(i);
+                        }
+                    }
                 }
             });
         }
