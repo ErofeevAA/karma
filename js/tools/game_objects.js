@@ -138,11 +138,9 @@ class Field {
 
     move(move) {
         if (typeof move === 'number') {
-            console.log('move');
-            console.log(move);
             let last = this.cards_in_fight.length - 1;
             let cards = this.players[this.num_attacker].cards_in_hand;
-            if (last === -1 && move > this.cards_in_fight[last]) {
+            if (last === -1 || move > this.cards_in_fight[last]) {
                 this.cardNoLessInFight(cards, this.getIndexCard(cards, move));
                 return;
             }
