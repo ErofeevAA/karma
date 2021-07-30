@@ -310,8 +310,9 @@ class ModelGameClient extends ModelGame {
         let cur_class = this;
         let val_changed = this.ref.child('deck').on('value', function (snapshot) {
             let data = snapshot.val();
-            if (data.deck !== undefined) {
-                cur_class.field.setDeck(data.deck);
+            //console.log(data);
+            if (data && data !== undefined) {
+                cur_class.field.setDeck(data);
                 cur_class.ref.child('deck').off('value', val_changed);
                 cur_class.initBlocks();
             }
