@@ -59,9 +59,9 @@ class Field {
                 this.deck.push(new NumCard(j));
             }
             this.deck.push(new KarmaCard(CardsEnum.GIVE_STACK));
-            this.deck.push(new KarmaCard(CardsEnum.PLAY_CARD));
+            /*this.deck.push(new KarmaCard(CardsEnum.PLAY_CARD));
             this.deck.push(new KarmaCard(CardsEnum.BOTTOM_TOP));
-            this.deck.push(new KarmaCard(CardsEnum.FIVE_OR_LESS));
+            this.deck.push(new KarmaCard(CardsEnum.FIVE_OR_LESS));*/
         }
 
         this.randomizeDeck();
