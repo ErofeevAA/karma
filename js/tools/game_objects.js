@@ -161,7 +161,8 @@ class Field {
             }
             if (move === CardsEnum.PLAY_CARD) {
                 this.karma_in_game = new KarmaCard(CardsEnum.PLAY_CARD);
-                this.changeAttacker();
+                let index = this.getIndexCard(this.players[this.num_attacker].cards_in_hand, move);
+                this.karmaCardsInFight(this.karma_in_game, index);
             }
             return;
         }
