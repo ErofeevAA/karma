@@ -119,7 +119,7 @@ function callBackChooseRoom() {
         g_block = document.createElement('div');
         g_block.className = "game-field-block";
         g_game_div.appendChild(g_block);
-        g_model = new ModelGameClient(g_num_room, g_block, g_player_name);
+        g_model = new ModelGameClient(g_num_room, g_block, g_player_name, menu);
         netGame();
         return;
     }
@@ -133,7 +133,7 @@ function callbackCreateRoom() {
     g_block = document.createElement('div');
     g_block.className = "game-field-block";
     g_game_div.appendChild(g_block);
-    g_model = new ModelGameHost(g_num_room, g_block, g_player_name);
+    g_model = new ModelGameHost(g_num_room, g_block, g_player_name, menu);
     netGame();
 }
 

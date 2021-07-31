@@ -1,5 +1,6 @@
 class ModelGame {
-    constructor(num_room, block, name) {
+    constructor(num_room, block, name, callback) {
+        this.callback = callback;
         this.name = name;
         this.num_player = 0;
         this.main_block = block;
@@ -389,6 +390,9 @@ class ModelGame {
         let val_changed = this.ref.child('move').on('value', function (snapshot) {
             let data = snapshot.val();
             if (data !== null && data !== undefined && data.step !== undefined) {
+                if (cur_class.checkOnWinner()) {
+                    cur_class.ref.child('move').off('value', val_changed);
+                }
                 if (data.player === cur_class.num_player) {
                     return;
                 }
@@ -423,12 +427,43 @@ class ModelGame {
             move
         });
     }
+
+    checkOnWinner() {
+        if (this.field.deck.length !== 0) {
+            return false;
+        }
+        for (let i = 0; i < this.field.players.length; ++i) {
+            let player = this.field.players[i];
+            if (player.cards_on_table.length === 0 && player.cards_in_hand.length === 0) {
+                this.winner(player.name);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    winner(name) {
+        while (this.main_block.firstChild) {
+            this.main_block.removeChild(this.main_block.firstChild);
+        }
+        this.main_block = document.createElement('div');
+        this.main_block.className = "game-over-block";
+        let p = document.createElement('p');
+        p.innerText = "Игрок " +  name + "выиграл!111";
+        this.main_block.appendChild(p);
+        let b = document.createElement('p');
+        b.className = "text-button";
+        let cur_class = this;
+        b.addEventListener('click', function () {
+            cur_class.callback();
+        })
+    }
 }
 
 class ModelGameHost extends ModelGame {
 
-    constructor(num_room, block, name) {
-        super(num_room, block, name);
+    constructor(num_room, block, name, callback) {
+        super(num_room, block, name, callback);
         //this.num_room = num_room;
         this.waitUsers();
     }
@@ -492,8 +527,8 @@ class ModelGameHost extends ModelGame {
 
 class ModelGameClient extends ModelGame {
 
-    constructor(num_room, block, name) {
-        super(num_room, block, name);
+    constructor(num_room, block, name, callback) {
+        super(num_room, block, name, callback);
         //this.num_room = num_room;
         this.field = new Field();
         this.ref = firebase.database().ref("rooms/" + num_room);

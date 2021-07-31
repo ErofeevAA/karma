@@ -4,6 +4,7 @@ class Card {
         this.image_path = "";
         this.name = name;
         this.genPath();
+        this.winner = "";
     }
 
     genPath(){}
