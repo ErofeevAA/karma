@@ -161,12 +161,6 @@ function train() {
     let karma_cards_text = initText(g_model.karma_cards_text);
     let give_a_stack_to_a_friend = initText(g_model.give_a_stack_to_a_friend);
     let give_a_stack_to_a_friend_text = initText(g_model.give_a_stack_to_a_friend_text);
-    let play_a_card_from_the_table = initText(g_model.play_a_card_from_the_table);
-    let play_a_card_from_the_table_text = initText(g_model.play_a_card_from_the_table_text);
-    let from_bottom_to_top = initText(g_model.from_bottom_to_top);
-    let from_bottom_to_top_text = initText(g_model.from_bottom_to_top_text);
-    let five_or_less = initText(g_model.five_or_less);
-    let five_or_less_text = initText(g_model.five_or_less_text);
 
     let b_menu = initButton(g_model.btn_menu, menu);
 
@@ -185,12 +179,6 @@ function train() {
     rules_block.appendChild(karma_cards_text);
     rules_block.appendChild(give_a_stack_to_a_friend);
     rules_block.appendChild(give_a_stack_to_a_friend_text);
-    rules_block.appendChild(play_a_card_from_the_table);
-    rules_block.appendChild(play_a_card_from_the_table_text);
-    rules_block.appendChild(from_bottom_to_top);
-    rules_block.appendChild(from_bottom_to_top_text);
-    rules_block.appendChild(five_or_less);
-    rules_block.appendChild(five_or_less_text);
 
     g_block.appendChild(rules_block);
     g_block.appendChild(b_menu);
