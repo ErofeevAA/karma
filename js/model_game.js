@@ -285,7 +285,7 @@ class ModelGame {
 
     updateDiscardPile() {
         let block = document.getElementById("discard-pile-block");
-        if (this.field.discard_pile && !block.firstChild) {
+        if (this.field.discard_pile && block.getElementsByClassName('img-card') === undefined) {
             let img = document.createElement('img');
             img.className = "img-card";
             img.alt = "";
