@@ -446,7 +446,7 @@ class ModelGame {
         while (this.main_block.firstChild) {
             this.main_block.removeChild(this.main_block.firstChild);
         }
-        this.main_block = document.createElement('div');
+        //this.main_block = document.createElement('div');
         this.main_block.className = "game-over-block";
         let p = document.createElement('p');
         p.innerText = "Игрок " +  name + "выиграл!111";
@@ -456,7 +456,8 @@ class ModelGame {
         let cur_class = this;
         b.addEventListener('click', function () {
             cur_class.callback();
-        })
+        });
+        this.main_block.appendChild(b);
     }
 }
 
@@ -507,7 +508,7 @@ class ModelGameHost extends ModelGame {
             }
             let cards_on_table = [];
             for (let j = 0; j < this.field.players[i].cards_on_table.length; ++j) {
-                let tmp = []
+                let tmp = [];
                 tmp.push(this.field.players[i].cards_on_table[j][0].name);
                 tmp.push(this.field.players[i].cards_on_table[j][1].name);
                 cards_on_table.push(tmp);
