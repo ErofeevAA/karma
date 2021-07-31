@@ -294,14 +294,13 @@ class ModelGame {
 
     updateCardFromTable() {
         let block = document.getElementById("cards-on-table-block");
-        if (block.childNodes.length === undefined) {
+        if (!block.firstChild) {
             return;
         }
         for (let j = 0; j < 2; ++j) {
             if (this.num_player === j && this.field.players[j].cards_on_table.length === 0) {
                 for (let i = 0; i < 3; ++i) {
-
-                    let node = block.childNodes[block.childNodes.length - 1];
+                    let node = block.firstChild;
                     block.removeChild(node);
                 }
             }
@@ -310,13 +309,13 @@ class ModelGame {
 
     updateCardOpponentFromTable() {
         let block = document.getElementById("cards-on-table-opponent-block");
-        if (block.childNodes.length === undefined) {
+        if (!block.firstChild) {
             return;
         }
         for (let j = 0; j < 2; ++j) {
             if (this.num_player !== j && this.field.players[j].cards_on_table.length === 0) {
                 for (let i = 0; i < 3; ++i) {
-                    let node = block.childNodes[block.childNodes.length - 1];
+                    let node = block.firstChild;
                     block.removeChild(node);
                 }
             }
