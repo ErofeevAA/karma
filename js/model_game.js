@@ -132,7 +132,7 @@ class ModelGame {
     }
 
     createCardsOnTable(cards) {
-        let cur_class = this;
+        //let cur_class = this;
         let block = document.createElement("div")
         block.className = "cards-on-table-block";
         block.id = "cards-on-table-block";
@@ -288,6 +288,7 @@ class ModelGame {
         if (this.field.discard_pile && block.getElementsByClassName('img-card')[0] === undefined) {
             let img = document.createElement('img');
             img.className = "img-card";
+            img.src = ModelGameEnum.CARD_SHIRT_PATH;
             img.alt = "";
             block.appendChild(img);
         }
@@ -423,7 +424,7 @@ class ModelGame {
             player: this.num_player,
             step: m
         };
-        let val_changed = this.ref.update({
+        this.ref.update({
             move
         });
     }
