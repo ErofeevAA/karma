@@ -200,7 +200,7 @@ class Field {
     karmaCardsInFight(card, index) {
         if (card.name === CardsEnum.GIVE_STACK) {
             this.karma_in_game = new KarmaCard(CardsEnum.GIVE_STACK);
-            if (this.deck.length === 0) {
+            if (this.cards_in_fight.length === 0) {
                 this.karma_in_game = undefined;
             }
             this.players[this.num_attacker].cards_in_hand.splice(index, 1);
