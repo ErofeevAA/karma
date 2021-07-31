@@ -141,13 +141,6 @@ class ModelGame {
             img.className = "img-card";
             img.src = cards[i][last].image_path;
             img.alt = String(i);
-            img.addEventListener('click', function () {
-                console.log(img.alt + ' ' + cards[i][last].name);
-                if (cur_class.field.num_attacker === cur_class.num_player
-                    && cur_class.field.karma_in_game.name === CardsEnum.PLAY_CARD) {
-                    cur_class.chosenCardFromTable(img.alt);
-                }
-            });
             block.appendChild(img);
         }
         return block;
@@ -311,13 +304,6 @@ class ModelGame {
         block.removeChild(node);
     }
 
-    chosenCardFromTable() {
-        this.field.takeFromTable();
-        this.updateInHand();
-        this.updateCardFromTable();
-        this.sendMove(CardsEnum.PLAY_CARD);
-    }
-
     chosenCardFromHand(index) {
         if (this.field.players[this.num_player].state === PlayerState.DEFENDER) {
             return false;
@@ -329,6 +315,8 @@ class ModelGame {
         if (card instanceof KarmaCard) {
             this.field.karmaCardsInFight(card, index);
             this.updateKarmaCardsInFightBlock();
+            this.updateInHand();
+            this.updateCardFromTable();
             return true;
         }
         let last = this.field.cards_in_fight.length - 1;

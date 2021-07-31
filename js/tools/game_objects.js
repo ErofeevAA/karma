@@ -161,6 +161,7 @@ class Field {
             }
             if (move === CardsEnum.PLAY_CARD) {
                 this.karma_in_game = new KarmaCard(CardsEnum.PLAY_CARD);
+                this.changeAttacker();
             }
             return;
         }
@@ -189,17 +190,21 @@ class Field {
             this.players[this.num_attacker].cards_in_hand.splice(index, 1);
             this.changeAttacker();
         }
+        if (card.name === CardsEnum.PLAY_CARD) {
+            this.karma_in_game = new KarmaCard(CardsEnum.PLAY_CARD);
+            this.players[this.num_attacker].cards_in_hand.splice(index, 1);
+            this.takeFromTable();
+            this.changeAttacker();
+        }
         //this.changeAttacker();
     }
 
     takeFromTable() {
         this.karma_in_game = undefined;
         let i = this.players[this.num_attacker].cards_on_table.length - 1;
-        this.karma_in_game = undefined;
         this.players[this.num_attacker].cards_in_hand.push(this.players[this.num_attacker].cards_on_table[i].pop());
         this.players[this.num_attacker].cards_in_hand.push(this.players[this.num_attacker].cards_on_table[i].pop());
         this.players[this.num_attacker].cards_on_table.pop();
-        this.changeAttacker();
     }
 
     cardNoLessInFight(card, index) {
