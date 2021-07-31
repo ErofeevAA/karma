@@ -125,6 +125,7 @@ body {
 }
 
 .list-rooms-block {
+    margin-top: 70px;
     display: flex;
     flex-direction: column;
     width: 900px;
