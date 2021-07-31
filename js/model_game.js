@@ -408,6 +408,7 @@ class ModelGame {
                 cur_class.updateDeck();
                 cur_class.updateNumOpponentCards(data.player);
                 cur_class.updateDiscardPile();
+                cur_class.updateCardOpponentFromTable();
             }
         });
     }
