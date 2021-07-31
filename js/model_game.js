@@ -285,7 +285,7 @@ class ModelGame {
 
     updateDiscardPile() {
         let block = document.getElementById("discard-pile-block");
-        if (this.field.discard_pile && block.childNodes.length === 0) {
+        if (this.field.discard_pile && !block.firstChild) {
             let img = document.createElement('img');
             img.className = "img-card";
             img.alt = "";
@@ -449,11 +449,13 @@ class ModelGame {
         //this.main_block = document.createElement('div');
         this.main_block.className = "game-over-block";
         let p = document.createElement('p');
-        p.innerText = "Игрок " +  name + "выиграл!111";
+        p.innerText = 'Игрок ' + '"' + name + '"' + ' выиграл!111';
         this.main_block.appendChild(p);
         let b = document.createElement('p');
         b.className = "text-button";
         let cur_class = this;
+        b.style.margin = "50px";
+        b.innerText = "Назад в меню";
         b.addEventListener('click', function () {
             cur_class.callback();
         });

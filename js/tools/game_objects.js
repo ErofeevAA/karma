@@ -4,7 +4,6 @@ class Card {
         this.image_path = "";
         this.name = name;
         this.genPath();
-        this.winner = "";
     }
 
     genPath(){}
@@ -203,6 +202,7 @@ class Field {
             this.karma_in_game = new KarmaCard(CardsEnum.GIVE_STACK);
             if (this.cards_in_fight.length === 0) {
                 this.karma_in_game = undefined;
+                this.discard_pile = true;
             }
             this.players[this.num_attacker].cards_in_hand.splice(index, 1);
             if (this.players[this.num_attacker].cards_in_hand.length === 0) {
