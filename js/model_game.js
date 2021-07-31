@@ -294,14 +294,33 @@ class ModelGame {
 
     updateCardFromTable() {
         let block = document.getElementById("cards-on-table-block");
-        let node = block.childNodes[block.childNodes.length - 1];
-        block.removeChild(node);
+        if (block.childNodes.length === undefined) {
+            return;
+        }
+        for (let j = 0; j < 2; ++j) {
+            if (this.num_player === j && this.field.players[j].cards_on_table.length === 0) {
+                for (let i = 0; i < 3; ++i) {
+
+                    let node = block.childNodes[block.childNodes.length - 1];
+                    block.removeChild(node);
+                }
+            }
+        }
     }
 
     updateCardOpponentFromTable() {
         let block = document.getElementById("cards-on-table-opponent-block");
-        let node = block.childNodes[block.childNodes.length - 1];
-        block.removeChild(node);
+        if (block.childNodes.length === undefined) {
+            return;
+        }
+        for (let j = 0; j < 2; ++j) {
+            if (this.num_player !== j && this.field.players[j].cards_on_table.length === 0) {
+                for (let i = 0; i < 3; ++i) {
+                    let node = block.childNodes[block.childNodes.length - 1];
+                    block.removeChild(node);
+                }
+            }
+        }
     }
 
     chosenCardFromHand(index) {
@@ -332,6 +351,7 @@ class ModelGame {
                 }
             }
             this.updateCardsInFightBlock();
+            this.updateCardFromTable();
             return true;
         }
         if (this.field.cards_in_fight[last].name === card.name) {
@@ -339,6 +359,7 @@ class ModelGame {
             this.updateDeck();
             this.updateBordersColor();
             this.updateCardsInFightBlock();
+            this.updateCardFromTable();
             for (let i = 0; i < this.field.players.length; ++i) {
                 if (i !== this.num_player) {
                     this.updateNumOpponentCards(i);
@@ -544,5 +565,6 @@ const ModelGameEnum = {
     CARD_SHIRT_PATH: "assets/playing_cards/card_shirt.png",
     ABANDON: "abandon",
     COLOR_ATTACK: "red",
-    COLOR_NOT_ATTACK: "#0B0C10"
+    COLOR_NOT_ATTACK: "#0B0C10",
+    GET_ALL_FROM_TABLE: "get_all_from_table"
 };

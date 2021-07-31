@@ -128,6 +128,17 @@ class Field {
         }
     }
 
+    getAllTable() {
+        let j = this.num_attacker;
+        for (let i = 0; i < this.players[j].cards_on_table.length; ++i) {
+            this.players[j].cards_in_hand.push(this.players[j].cards_on_table[i].pop());
+            this.players[j].cards_in_hand.push(this.players[j].cards_on_table[i].pop())
+        }
+        this.players[j].cards_on_table.pop();
+        this.players[j].cards_on_table.pop();
+        this.players[j].cards_on_table.pop();
+    }
+
     getIndexCard(cards, name) {
         for (let i = 0; i < cards.length; ++i) {
             if (cards[i].name === name) {
@@ -189,6 +200,13 @@ class Field {
         if (card.name === CardsEnum.GIVE_STACK) {
             this.karma_in_game = new KarmaCard(CardsEnum.GIVE_STACK);
             this.players[this.num_attacker].cards_in_hand.splice(index, 1);
+            if (this.players[this.num_attacker].cards_in_hand.length === 0) {
+                if (this.deck.length === 0) {
+                    this.getAllTable();
+                } else {
+                    this.players[this.num_attacker].cards_in_hand.push(this.deck.pop());
+                }
+            }
             this.changeAttacker();
         }
         if (card.name === CardsEnum.PLAY_CARD) {
@@ -213,6 +231,13 @@ class Field {
         //console.log(card);
         this.cards_in_fight.push(card);
         this.players[this.num_attacker].cards_in_hand.splice(index, 1);
+        if (this.players[this.num_attacker].cards_in_hand.length === 0) {
+            if (this.deck.length === 0) {
+                this.getAllTable();
+            } else {
+                this.players[this.num_attacker].cards_in_hand.push(this.deck.pop());
+            }
+        }
         this.changeAttacker();
     }
 
@@ -222,6 +247,13 @@ class Field {
         for (let i = 0; i < this.players.length; ++i) {
             while (this.players[i].cards_in_hand.length < 6 && this.deck.length > 0) {
                 this.players[i].cards_in_hand.push(this.deck.pop());
+            }
+        }
+        if (this.players[this.num_attacker].cards_in_hand.length === 0) {
+            if (this.deck.length === 0) {
+                this.getAllTable();
+            } else {
+                this.players[this.num_attacker].cards_in_hand.push(this.deck.pop());
             }
         }
         this.changeFirstAttacker();
