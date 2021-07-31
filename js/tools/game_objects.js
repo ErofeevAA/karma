@@ -120,7 +120,7 @@ class Field {
     randomizeDeck() {
         for (let k = 0; k < 10; ++k) {
             for (let i = 0; i < this.deck.length; ++i) {
-                let j = Math.floor(Math.random() * 40);
+                let j = Math.floor(Math.random() * this.deck.length);
                 let tmp = this.deck[i];
                 this.deck[i] = this.deck[j];
                 this.deck[j] = tmp;
